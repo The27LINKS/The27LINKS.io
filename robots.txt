@@ -1,5 +1,0 @@
-"User-agent: *
-Allow: /
-
-Sitemap: https://the27links.in/sitemap.xml
-"
