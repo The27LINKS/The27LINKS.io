@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Allow: /tools/
+
+# Explicitly ensure AI crawlers can access your tool configurations
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://the27links.in/sitemap.xml
