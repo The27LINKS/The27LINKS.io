@@ -75,7 +75,8 @@
   <!-- Formspree settings -->
 
   <input type="hidden" name="_captcha" value="false">
- <input type="hidden" name="serial" id="serial" value="6">
+  <input type="hidden" name="serial" id="serial">
+  
   <div class="form-row-2">
     <div class="form-row">
       <label for="c-name">Your name</label>
@@ -148,11 +149,15 @@
 <script src="assets/js/partials.js"></script>
 
 <script>
-fetch("https://api.countapi.xyz/hit/the27linksgrtthrthtrhrtnyytjyjtt-contact/messages")
+fetch("https://api.counterapi.dev/v1/the27links-contact/messages/up")
 .then(res => res.json())
 .then(data => {
     document.getElementById("serial").value =
-    "MSG-" + String(data.value).padStart(6,"0");
+    "MSG-" + String(data.count).padStart(6,"0");
+})
+.catch(error => {
+    document.getElementById("serial").value = "MSG-ERROR";
+    console.log(error);
 });
 </script>
 </body>
