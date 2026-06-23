@@ -75,7 +75,7 @@
   <!-- Formspree settings -->
 
   <input type="hidden" name="_captcha" value="false">
-
+ <input type="hidden" name="serial" id="serial">
   <div class="form-row-2">
     <div class="form-row">
       <label for="c-name">Your name</label>
@@ -146,5 +146,14 @@
   
 <script src="assets/js/main.js"></script>
 <script src="assets/js/partials.js"></script>
+
+<script>
+fetch("https://api.countapi.xyz/hit/the27links-contact/messages")
+.then(res => res.json())
+.then(data => {
+    document.getElementById("serial").value =
+    "MSG-" + String(data.value).padStart(6,"0");
+});
+</script>
 </body>
 </html>
