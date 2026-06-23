@@ -74,25 +74,24 @@
 
   <!-- Formspree settings -->
 
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="serial" id="serial">
+  <input type="hidden" name="S.No." id="serial">
   
   <div class="form-row-2">
     <div class="form-row">
       <label for="c-name">Your name</label>
-      <input id="c-name" name="name" type="text" required data-testid="contact-name" />
+      <input id="c-name" name="Name" type="text" required data-testid="contact-name" />
     </div>
 
     <div class="form-row">
       <label for="c-email">Email</label>
-      <input id="c-email" name="email" type="email" required data-testid="contact-email" />
+      <input id="c-email" name="Email" type="email" required data-testid="contact-email" />
     </div>
   </div>
 
 
   <div class="form-row">
     <label for="c-subject">Subject</label>
-    <input id="c-subject" name="_subject" type="text" required data-testid="contact-subject" />
+    <input id="c-subject" name="Subject" type="text" required data-testid="contact-subject" />
   </div>
 
 
@@ -100,7 +99,7 @@
     <label for="c-message">Message</label>
     <textarea 
       id="c-message" 
-      name="message" 
+      name="Message" 
       required 
       placeholder="What's on your mind?" 
       data-testid="contact-message"></textarea>
