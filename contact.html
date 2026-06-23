@@ -65,7 +65,25 @@
       <div class="tool-panel">
         <h2 style="font-family: var(--font-display); font-size: 28px; font-weight: 500; margin: 0 0 8px;">Send a message</h2>
         <p class="hint">Replace the Formspree endpoint in the form's <code>action</code> attribute with your own once you set it up at <a href="https://formspree.io" rel="nofollow noopener" target="_blank">formspree.io</a>. Until then, use the mailto link below.</p>
+<form
+  action="https://formspree.io/f/mzdlzzze"
+  method="POST"
+>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
+</form>
 
+
+
+        
         <form id="contact-form" action="https://formspree.io/f/your-endpoint-here" method="POST" data-testid="contact-form">
           <div class="form-row-2">
             <div class="form-row">
