@@ -65,20 +65,59 @@
       <div class="tool-panel">
         <h2 style="font-family: var(--font-display); font-size: 28px; font-weight: 500; margin: 0 0 8px;">Send a message</h2>
         <p class="hint">Replace the Formspree endpoint in the form's <code>action</code> attribute with your own once you set it up at <a href="https://formspree.io" rel="nofollow noopener" target="_blank">formspree.io</a>. Until then, use the mailto link below.</p>
-<form
-  action="https://formspree.io/f/mzdlzzze"
-  method="POST"
->
-  <label>
-    Your email:
-    <input type="email" name="email">
-  </label>
-  <label>
-    Your message:
-    <textarea name="message"></textarea>
-  </label>
-  <!-- your other form fields go here -->
-  <button type="submit">Send</button>
+
+
+        <form id="contact-form" 
+      action="https://formspree.io/f/mzdlzzze" 
+      method="POST" 
+      data-testid="contact-form">
+
+  <!-- Formspree settings -->
+  <input type="hidden" name="_subject" value="New Contact Form Message">
+  <input type="hidden" name="_captcha" value="false">
+
+  <div class="form-row-2">
+    <div class="form-row">
+      <label for="c-name">Your name</label>
+      <input id="c-name" name="name" type="text" required data-testid="contact-name" />
+    </div>
+
+    <div class="form-row">
+      <label for="c-email">Email</label>
+      <input id="c-email" name="email" type="email" required data-testid="contact-email" />
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <label for="c-subject">Subject</label>
+    <input id="c-subject" name="subject" type="text" required data-testid="contact-subject" />
+  </div>
+
+
+  <div class="form-row">
+    <label for="c-message">Message</label>
+    <textarea 
+      id="c-message" 
+      name="message" 
+      required 
+      placeholder="What's on your mind?" 
+      data-testid="contact-message"></textarea>
+  </div>
+
+
+  <div class="actions-bar">
+    <button type="submit" class="btn btn-primary" data-testid="contact-submit">
+      Send message
+    </button>
+
+    <a class="btn btn-ghost" 
+       href="mailto:hello@the27links.in" 
+       data-testid="contact-mailto">
+       Or email directly
+    </a>
+  </div>
+
 </form>
 
 
