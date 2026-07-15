@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Image to PDF — Combine images into a PDF | The 27 Links</title>
+<meta name="description" content="Turn multiple JPG, PNG or WebP images into a single PDF in your browser. Reorder, preview and download." />
+<link rel="canonical" href="https://the27links.in/tools/image-to-pdf.html" />
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/css/styles.css" />
+</head>
+<body data-testid="image-to-pdf-page">
+<div data-include="/partials/header.html"></div>
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/tools.html">Tools</a> / Image to PDF</div>
+    <h1>Image to PDF</h1>
+    <p>Compose JPG, PNG or WebP images into a single PDF — each image becomes one page.</p>
+  </div>
+</section>
+<section class="tool-shell">
+  <div class="container">
+    <div class="layout">
+      <div class="tool-panel">
+        <h2>Upload images</h2>
+        <p class="hint">Drag rows in the list to reorder. JPG, PNG and WebP supported.</p>
+        <label class="dropzone" id="dropzone" data-testid="image-to-pdf-dropzone">
+          <strong>Drag &amp; drop images</strong>
+          <span>or click to select · JPG, PNG, WebP</span>
+          <input type="file" accept="image/jpeg,image/png,image/webp" multiple />
+        </label>
+        <div class="file-list" id="file-list"></div>
+
+        <div class="form-row-2" style="margin-top: 16px;">
+          <div class="form-row">
+            <label>Page size</label>
+            <select id="size"><option value="fit">Fit to image</option><option value="a4">A4 portrait</option><option value="letter">US Letter</option></select>
+          </div>
+          <div class="form-row">
+            <label>Margin</label>
+            <select id="margin"><option value="0">None</option><option value="20">Small (20 pt)</option><option value="40">Medium (40 pt)</option><option value="60">Large (60 pt)</option></select>
+          </div>
+        </div>
+
+        <div class="actions-bar">
+          <button class="btn btn-primary" id="run-btn" disabled data-testid="image-to-pdf-run">Build PDF</button>
+          <button class="btn btn-ghost" id="clear-btn">Reset</button>
+        </div>
+        <div class="result-box" id="result" data-testid="image-to-pdf-result"></div>
+      </div>
+      <aside class="tool-sidebar">
+        <div class="ad-slot">Advertisement<br/>300 × 600</div>
+        <div class="sidebar-card"><h4>Tips</h4><p>"Fit to image" makes each page match the source dimensions — great for scanned docs. A4/Letter center and scale the image.</p></div>
+        <div class="sidebar-card"><h4>Related tools</h4><ul><li><a href="/tools/pdf-to-image.html">PDF to Image</a></li><li><a href="/tools/image-compress.html">Image Compress</a></li></ul></div>
+      </aside>
+    </div>
+  </div>
+</section>
+<div data-include="/partials/footer.html"></div>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/partials.js"></script>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script>
+(function () {
+  const { PDFDocument } = PDFLib;
+  let files = [];
+  let isGenerating = false;
+  
+  const dz = document.getElementById('dropzone');
+  const listEl = document.getElementById('file-list');
+  const runBtn = document.getElementById('run-btn');
+  const clearBtn = document.getElementById('clear-btn');
+  const result = document.getElementById('result');
+  const sizeSel = document.getElementById('size');
+  const marginSel = document.getElementById('margin');
+
+  function render() {
+    listEl.innerHTML = files.map((f, i) => {
+      const sizeStr = typeof fmtBytes === 'function' ? fmtBytes(f.size) : (f.size / 1024).toFixed(2) + ' KB';
+      return `
+      <div class="file-item draggable" draggable="true" data-idx="${i}">
+        <span style="font-family: var(--font-mono); font-size: 12px; color: var(--muted); min-width: 22px;">${i+1}.</span>
+        <span class="fi-name">${f.name}</span>
+        <span class="fi-size">${sizeStr}</span>
+        <button data-remove="${i}">✕</button>
+      </div>
+    `}).join('');
+    
+    runBtn.disabled = files.length === 0 || isGenerating;
+    
+    listEl.querySelectorAll('[data-remove]').forEach(b => b.addEventListener('click', () => { 
+      if (isGenerating) return;
+      files.splice(+b.dataset.remove, 1); 
+      render(); 
+    }));
+    
+    let drag = null;
+    listEl.querySelectorAll('.file-item').forEach(el => {
+      el.addEventListener('dragstart', (e) => { 
+        if (isGenerating) { e.preventDefault(); return; }
+        drag = +el.dataset.idx; 
+        // Firefox requires dataTransfer to be set to allow dragging
+        if (e.dataTransfer) {
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', drag.toString());
+        }
+      });
+      el.addEventListener('dragover', e => {
+        if (!isGenerating) e.preventDefault();
+      });
+      el.addEventListener('drop', e => { 
+        e.preventDefault(); 
+        if (isGenerating) return;
+        const d = +el.dataset.idx; 
+        if (drag === null || d === drag) return; 
+        const m = files.splice(drag, 1)[0]; 
+        files.splice(d, 0, m); 
+        render(); 
+      });
+    });
+  }
+
+  // Safely handle Dropzone callback + fallback for native arrays/FileLists
+  if (typeof makeDropzone === 'function') {
+    makeDropzone(dz, fs => { 
+      if (isGenerating) return;
+      const fileArray = Array.isArray(fs) ? fs : Array.from(fs || []);
+      files = files.concat(fileArray.filter(f => /^image\/(jpeg|png|webp)$/i.test(f.type))); 
+      render(); 
+    }, { accept: 'image/*', multiple: true });
+  }
+
+  clearBtn.addEventListener('click', () => { 
+    if (isGenerating) return;
+    files = []; 
+    render(); 
+    result.classList.remove('show'); 
+  });
+
+  async function embedImage(pdf, file) {
+    const buf = await file.arrayBuffer();
+    const type = file.type.toLowerCase();
+    
+    if (type === 'image/png') return pdf.embedPng(buf);
+    if (type === 'image/jpeg' || type === 'image/jpg') return pdf.embedJpg(buf);
+    
+    // For WebP or others, re-encode to PNG via canvas
+    const url = URL.createObjectURL(file);
+    const img = await new Promise((res, rej) => { 
+      const i = new Image(); 
+      i.onload = () => res(i); 
+      i.onerror = rej; 
+      i.src = url; 
+    });
+    const cv = document.createElement('canvas'); 
+    cv.width = img.naturalWidth; 
+    cv.height = img.naturalHeight;
+    cv.getContext('2d').drawImage(img, 0, 0);
+    URL.revokeObjectURL(url);
+    const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
+    return pdf.embedPng(await blob.arrayBuffer());
+  }
+
+  runBtn.addEventListener('click', async () => {
+    if (!files.length || isGenerating) return;
+    isGenerating = true;
+    render(); // Re-render to disable button while processing
+    result.classList.remove('show', 'error');
+    
+    try {
+      const pdf = await PDFDocument.create();
+      const margin = parseInt(marginSel.value, 10);
+      const sizes = { a4: [595.28, 841.89], letter: [612, 792] };
+      
+      for (const f of files) {
+        const img = await embedImage(pdf, f);
+        let pw, ph;
+        
+        if (sizeSel.value === 'fit') { 
+          pw = img.width + margin * 2; 
+          ph = img.height + margin * 2; 
+        } else { 
+          [pw, ph] = sizes[sizeSel.value]; 
+        }
+        
+        const page = pdf.addPage([pw, ph]);
+        const aw = pw - margin * 2, ah = ph - margin * 2;
+        const s = Math.min(aw / img.width, ah / img.height);
+        const dw = img.width * s, dh = img.height * s;
+        page.drawImage(img, { x: (pw - dw) / 2, y: (ph - dh) / 2, width: dw, height: dh });
+      }
+      
+      const bytes = await pdf.save();
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const filename = `images-${Date.now()}.pdf`;
+
+      // Fallback in case download function from main.js is missing
+      if (typeof download === 'function') {
+        download(blob, filename, 'application/pdf');
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+      
+      const sizeStr = typeof fmtBytes === 'function' ? fmtBytes(bytes.byteLength) : (bytes.byteLength / 1024 / 1024).toFixed(2) + ' MB';
+      result.classList.add('show'); 
+      result.innerHTML = `<strong>Done.</strong> Built a PDF with ${files.length} page(s) (${sizeStr}).`;
+      if (typeof toast === 'function') toast('PDF created');
+      
+    } catch (e) {
+      result.classList.add('show', 'error'); 
+      result.textContent = 'Failed: ' + (e.message || e);
+    } finally { 
+      isGenerating = false;
+      render(); // Reset UI state properly based on remaining files
+    }
+  });
+})();
+</script>
+</body>
+</html>
