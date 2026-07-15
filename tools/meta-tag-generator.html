@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Meta Tag Generator | The27LINKS</title>
-  <meta name="description" content="Generate HTML meta tags for SEO, Open Graph (Facebook) and Twitter cards with a live preview." />
-  <meta name="keywords" content="meta tag generator, seo tags generator, open graph creator, twitter card generator, html meta tags, live preview seo, free seo tools, the27links">
+  <title>Advanced Meta Tag Generator | The27LINKS</title>
+  <meta name="description" content="Generate HTML meta tags for SEO, Open Graph (Facebook), and Twitter cards with live SERP and social media previews." />
+  <meta name="keywords" content="meta tag generator, seo tags generator, open graph creator, twitter card generator, html meta tags, live preview seo, free seo tools, robots meta tag, the27links">
   <link rel="canonical" href="https://the27links.in/tools/meta-tag-generator" />
   
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
@@ -14,19 +14,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/styles.css" />
     
-<!-------------------- Code To Display Google Ads On Website -------------------->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7448142804909345"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7448142804909345" crossorigin="anonymous"></script>
   
+  <style>
+    .social-preview-box { border: 1px solid var(--line, #e2e8f0); border-radius: 8px; overflow: hidden; background: var(--bg-alt, #f8fafc); margin-bottom: 24px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .sp-img { width: 100%; height: 160px; background: #cbd5e1; object-fit: cover; border-bottom: 1px solid var(--line, #e2e8f0); display: block; }
+    .sp-content { padding: 12px 16px; }
+    .sp-domain { font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 4px; }
+    .sp-title { font-size: 16px; font-weight: 600; color: #0f172a; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sp-desc { font-size: 14px; color: #475569; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .seo-article h2 { font-family: var(--font-display); font-size: 24px; margin: 32px 0 16px; color: var(--heading); }
+    .seo-article h3 { font-family: var(--font-display); font-size: 20px; margin: 24px 0 12px; color: var(--heading); }
+    .seo-article p, .seo-article li { font-size: 16px; line-height: 1.6; color: var(--ink-soft); margin-bottom: 16px; }
+    .seo-article ul { margin-left: 20px; margin-bottom: 24px; }
+    pre.code-output { background: #0f172a; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; font-family: var(--font-mono); font-size: 13px; line-height: 1.5; white-space: pre-wrap; }
+  </style>
 </head>
 
-          <!-------------------- JSON-LD Structured Data Schema -------------------->
-<script type="application/ld+json">
+          <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "@id": "https://the27links.in/tools/meta-tag-generator",
-  "name": "Meta Tag Generator",
+  "name": "Advanced Meta Tag Generator",
   "url": "https://the27links.in/tools/meta-tag-generator",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "All",
@@ -36,29 +46,27 @@
     "price": "0",
     "priceCurrency": "INR"
   },
-  "description": "Generate HTML meta tags for SEO, Open Graph (Facebook) and Twitter cards with a live preview."
+  "description": "Generate HTML meta tags for SEO, Open Graph (Facebook) and Twitter cards with live social and SERP previews."
 }
 </script>
   
-<!-------------------- Google Anylitics Tag -------------------->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKGLM2P6G3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-WKGLM2P6G3');
 </script>
 
-  
 <body data-testid="meta-page">
 
   <div data-include="../partials/header.html"></div>
 
   <section class="page-header">
     <div class="container">
-      <h1>Meta Tag Generator</h1>
-      <p>Fill in the basics and paste clean meta tags straight into your <code>&lt;head&gt;</code>.</p>
+      <div class="breadcrumbs"><a href="/">Home</a> / <a href="/tools.html">Tools</a> / Meta Tag Generator</div>
+      <h1>Advanced Meta Tag Generator</h1>
+      <p>Instantly generate SEO, Open Graph, and Twitter Card meta tags with real-time visual previews.</p>
     </div>
   </section>
 
@@ -73,7 +81,7 @@
             <div class="form-row">
               <label>Title (max 60)</label>
               <input id="m-title" type="text" maxlength="70" placeholder="Awesome Page Title" data-testid="meta-title" />
-              <div class="help"><span id="title-count">0</span>/60</div>
+              <div class="help"><span id="title-count">0</span>/60 characters</div>
             </div>
             <div class="form-row">
               <label>Site name</label>
@@ -83,25 +91,25 @@
           
           <div class="form-row">
             <label>Description (max 160)</label>
-            <textarea id="m-desc" maxlength="180" style="min-height: 96px;" placeholder="Short, compelling summary…" data-testid="meta-desc"></textarea>
-            <div class="help"><span id="desc-count">0</span>/160</div>
+            <textarea id="m-desc" maxlength="180" style="min-height: 96px;" placeholder="Write a short, compelling summary to increase your click-through rate..." data-testid="meta-desc"></textarea>
+            <div class="help"><span id="desc-count">0</span>/160 characters</div>
           </div>
           
           <div class="form-row-2">
             <div class="form-row">
               <label>Canonical URL</label>
-              <input id="m-url" type="text" placeholder="https://example.com/page" />
+              <input id="m-url" type="url" placeholder="https://example.com/page" />
             </div>
             <div class="form-row">
               <label>Image URL (og:image)</label>
-              <input id="m-image" type="text" placeholder="https://example.com/cover.jpg" />
+              <input id="m-image" type="url" placeholder="https://example.com/cover.jpg" />
             </div>
           </div>
           
           <div class="form-row-2">
             <div class="form-row">
               <label>Author</label>
-              <input id="m-author" type="text" />
+              <input id="m-author" type="text" placeholder="John Doe" />
             </div>
             <div class="form-row">
               <label>Twitter handle</label>
@@ -111,43 +119,127 @@
           
           <div class="form-row">
             <label>Keywords (comma-separated)</label>
-            <input id="m-keys" type="text" />
+            <input id="m-keys" type="text" placeholder="seo, meta tags, generator, web design" />
           </div>
+
+          <details style="margin-bottom: 24px; border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px;">
+            <summary style="font-weight: 500; cursor: pointer; color: var(--ink);">Advanced SEO Options</summary>
+            <div class="form-row-2" style="margin-top: 16px;">
+              <div class="form-row">
+                <label>Robots (Indexing)</label>
+                <select id="m-robots">
+                  <option value="index, follow">Index, Follow (Default)</option>
+                  <option value="noindex, follow">No Index, Follow</option>
+                  <option value="index, nofollow">Index, No Follow</option>
+                  <option value="noindex, nofollow">No Index, No Follow</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label>Language (HTML lang)</label>
+                <input id="m-lang" type="text" placeholder="en, es, fr, etc." value="en" />
+              </div>
+              <div class="form-row">
+                <label>Theme Color (Mobile Browsers)</label>
+                <input id="m-theme" type="color" value="#ffffff" style="height: 40px; padding: 2px;" />
+              </div>
+            </div>
+          </details>
 
           <div class="actions-bar">
-            <button class="btn btn-primary" id="gen-btn" data-testid="meta-generate">Generate tags</button>
-            <button class="btn btn-ghost" id="copy-btn" data-testid="meta-copy">Copy HTML</button>
+            <button class="btn btn-primary" id="copy-btn" data-testid="meta-copy">Copy HTML Code</button>
+            <button class="btn btn-ghost" id="reset-btn">Reset Fields</button>
           </div>
 
-          <h3 style="margin-top: 32px; font-family: var(--font-display); font-weight: 500;">Output</h3>
-          <div class="output-preview" id="out" data-testid="meta-output"><em>Fill the fields and click "Generate tags".</em></div>
+          <h3 style="margin-top: 32px; font-family: var(--font-display); font-weight: 500;">Output HTML</h3>
+          <pre class="code-output" id="out" data-testid="meta-output">Start typing to generate tags automatically...</pre>
 
-          <h3 style="margin-top: 32px; font-family: var(--font-display); font-weight: 500;">Google preview</h3>
-          <div style="border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: var(--bg-alt);">
+          <h3 style="margin-top: 32px; font-family: var(--font-display); font-weight: 500;">Live Previews</h3>
+          
+          <div style="margin-bottom: 16px; font-size: 14px; font-weight: 600; color: var(--muted);">Google Search</div>
+          <div style="border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: var(--bg-alt); margin-bottom: 24px;">
             <div id="p-url" style="font-size: 13px; color: #006621;">https://example.com</div>
-            <div id="p-title" style="font-size: 20px; color: #1a0dab; margin: 4px 0;">Awesome Page Title</div>
-            <div id="p-desc" style="font-size: 14px; color: var(--ink-soft);">Short summary appears here…</div>
+            <div id="p-title" style="font-size: 20px; color: #1a0dab; margin: 4px 0; cursor: pointer; text-decoration: none;">Awesome Page Title</div>
+            <div id="p-desc" style="font-size: 14px; color: var(--ink-soft); line-height: 1.5;">Short, compelling summary appears here…</div>
           </div>
+
+          <div class="form-row-2">
+            <div>
+              <div style="margin-bottom: 12px; font-size: 14px; font-weight: 600; color: var(--muted);">Facebook / LinkedIn (Open Graph)</div>
+              <div class="social-preview-box">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23cbd5e1'/%3E%3C/svg%3E" alt="Cover" class="sp-img" id="fb-img">
+                <div class="sp-content">
+                  <div class="sp-domain" id="fb-domain">EXAMPLE.COM</div>
+                  <div class="sp-title" id="fb-title">Awesome Page Title</div>
+                  <div class="sp-desc" id="fb-desc">Short, compelling summary appears here…</div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <div style="margin-bottom: 12px; font-size: 14px; font-weight: 600; color: var(--muted);">Twitter (X) Card</div>
+              <div class="social-preview-box" style="border-radius: 16px;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23cbd5e1'/%3E%3C/svg%3E" alt="Cover" class="sp-img" id="tw-img">
+                <div class="sp-content">
+                  <div class="sp-title" id="tw-title">Awesome Page Title</div>
+                  <div class="sp-desc" id="tw-desc">Short, compelling summary appears here…</div>
+                  <div class="sp-domain" style="margin-top: 4px; text-transform: lowercase; display: flex; align-items: center; gap: 4px;" id="tw-domain">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg> example.com
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
         
         <aside class="tool-sidebar">
           <a href="https://the27links.in" rel="noopener noreferrer" class="ad-slot active-ad" data-testid="ad-slot">
-            <img src="../assets/gif/Animation.gif" alt="Advertisement" />
-         </a>
+            <img src="../assets/gif/Animation.gif" alt="Advertisement" style="width: 100%; border-radius: 8px;" />
+          </a>
           <div class="sidebar-card">
-            <h4>SEO tip</h4>
-            <p>Put your most important keyword in the first 30 characters of the title. Google truncates around 60.</p>
+            <h4>SEO Tip</h4>
+            <p>Put your most important keyword in the first 30 characters of the title. Google truncates titles after roughly 60 characters.</p>
           </div>
           <div class="sidebar-card">
-            <h4>Related tools</h4>
+            <h4>Related Tools</h4>
             <ul>
               <li><a href="word-counter.html">Word Counter</a></li>
               <li><a href="case-converter.html">Case Converter</a></li>
+              <li><a href="slug-generator.html">URL Slug Generator</a></li>
             </ul>
+          </div>
+          <div class="ad-slot" style="margin-top: 24px; text-align: center; color: var(--muted); border: 1px dashed var(--line); padding: 40px 10px;">
+            Advertisement<br/>300 × 250
           </div>
         </aside>
         
       </div>
+    </div>
+  </section>
+
+  <section style="background: var(--bg-alt); padding: 60px 0; border-top: 1px solid var(--line);">
+    <div class="container">
+      <article class="seo-article" style="max-width: 800px; margin: 0 auto;">
+        <h2>What are Meta Tags and Why are They Important?</h2>
+        <p>Meta tags are snippets of HTML code that describe a web page's content. They don't appear on the page itself, but rather in the page's source code within the <code>&lt;head&gt;</code> section. Search engines like Google, and social media platforms like Facebook and Twitter, use these tags to understand what your page is about and how to display it.</p>
+        <p>Using a comprehensive <strong>Meta Tag Generator</strong> ensures your website communicates properly with web crawlers, directly influencing your SEO rankings and click-through rates (CTR).</p>
+
+        <h3>1. SEO Title and Description Tags</h3>
+        <p>The <strong>Title Tag</strong> is the most critical meta tag for SEO. It acts as the headline in search engine result pages (SERPs). Keep it under 60 characters to prevent Google from truncating it. The <strong>Meta Description</strong> acts as a sales pitch. While it doesn't directly impact rankings, a compelling description (under 160 characters) significantly increases the likelihood that a user will click your link.</p>
+
+        <h3>2. What is Open Graph (OG)?</h3>
+        <p>Originally created by Facebook, Open Graph tags control how your URLs look when shared on social media platforms like Facebook, LinkedIn, Pinterest, and WhatsApp. By specifying the <code>og:image</code>, <code>og:title</code>, and <code>og:description</code>, you ensure your shared links display as beautiful, clickable cards rather than plain text links. This greatly boosts social media engagement.</p>
+
+        <h3>3. Twitter Cards</h3>
+        <p>Similar to Open Graph, Twitter uses its own proprietary metadata called Twitter Cards. Using the <code>twitter:card</code> tag (usually set to "summary_large_image") guarantees that when someone tweets your link, a large, eye-catching image appears alongside your title and description.</p>
+
+        <h3>Best Practices for Webmasters</h3>
+        <ul>
+          <li><strong>Uniqueness:</strong> Ensure every single page on your website has a unique title and meta description.</li>
+          <li><strong>Image Sizing:</strong> For Open Graph and Twitter images, use a resolution of at least 1200 x 630 pixels for the best display quality across high-resolution screens.</li>
+          <li><strong>Robots Tag:</strong> Use the robots tag to tell Google whether it should index a page and follow its links. By default, pages are set to "index, follow", but you might want to hide internal search results or duplicate pages using "noindex".</li>
+        </ul>
+      </article>
     </div>
   </section>
 
@@ -159,15 +251,13 @@
     (function () {
       const $ = id => document.getElementById(id);
       
-      // Escape HTML to prevent injection when outputting tags
+      // Escape HTML to prevent injection
       const esc = s => (s || '').replace(/[<>&"']/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;' }[c]));
       
-      // Character counters
-      $('m-title').addEventListener('input', () => $('title-count').textContent = $('m-title').value.length);
-      $('m-desc').addEventListener('input', () => $('desc-count').textContent = $('m-desc').value.length);
+      const defaultImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='1' height='1' fill='%23cbd5e1'/%3E%3C/svg%3E";
 
-      // Builder logic
-      function build() {
+      function updateUI() {
+        // Fetch values
         const t = $('m-title').value;
         const d = $('m-desc').value;
         const u = $('m-url').value;
@@ -176,59 +266,100 @@
         const au = $('m-author').value;
         const tw = $('m-tw').value;
         const kw = $('m-keys').value;
-        
+        const rob = $('m-robots').value;
+        const lang = $('m-lang').value || 'en';
+        const theme = $('m-theme').value;
+
+        // Update Counters
+        $('title-count').textContent = t.length;
+        $('desc-count').textContent = d.length;
+
+        // --- Build HTML Code ---
         const lines = [];
-        
+        lines.push(``);
         if (t) lines.push(`<title>${esc(t)}</title>`);
-        if (d) lines.push(`<meta name="description" content="${esc(d)}" />`);
-        if (kw) lines.push(`<meta name="keywords" content="${esc(kw)}" />`);
-        if (au) lines.push(`<meta name="author" content="${esc(au)}" />`);
-        if (u) lines.push(`<link rel="canonical" href="${esc(u)}" />`);
+        if (d) lines.push(`<meta name="description" content="${esc(d)}">`);
+        if (kw) lines.push(`<meta name="keywords" content="${esc(kw)}">`);
+        if (au) lines.push(`<meta name="author" content="${esc(au)}">`);
+        lines.push(`<meta name="robots" content="${esc(rob)}">`);
+        if (theme && theme !== '#ffffff') lines.push(`<meta name="theme-color" content="${theme}">`);
+        if (u) lines.push(`<link rel="canonical" href="${esc(u)}">`);
         
-        if (t) lines.push(`<meta property="og:title" content="${esc(t)}" />`);
-        if (d) lines.push(`<meta property="og:description" content="${esc(d)}" />`);
-        if (site) lines.push(`<meta property="og:site_name" content="${esc(site)}" />`);
-        lines.push(`<meta property="og:type" content="website" />`);
-        if (u) lines.push(`<meta property="og:url" content="${esc(u)}" />`);
-        if (im) lines.push(`<meta property="og:image" content="${esc(im)}" />`);
+        lines.push(`\n`);
+        lines.push(`<meta property="og:type" content="website">`);
+        if (u) lines.push(`<meta property="og:url" content="${esc(u)}">`);
+        if (t) lines.push(`<meta property="og:title" content="${esc(t)}">`);
+        if (d) lines.push(`<meta property="og:description" content="${esc(d)}">`);
+        if (im) lines.push(`<meta property="og:image" content="${esc(im)}">`);
+        if (site) lines.push(`<meta property="og:site_name" content="${esc(site)}">`);
         
-        lines.push(`<meta name="twitter:card" content="summary_large_image" />`);
-        if (tw) lines.push(`<meta name="twitter:site" content="${esc(tw)}" />`);
-        if (t) lines.push(`<meta name="twitter:title" content="${esc(t)}" />`);
-        if (d) lines.push(`<meta name="twitter:description" content="${esc(d)}" />`);
-        if (im) lines.push(`<meta name="twitter:image" content="${esc(im)}" />`);
+        lines.push(`\n`);
+        lines.push(`<meta name="twitter:card" content="summary_large_image">`);
+        if (tw) lines.push(`<meta name="twitter:site" content="${esc(tw)}">`);
+        if (u) lines.push(`<meta property="twitter:url" content="${esc(u)}">`);
+        if (t) lines.push(`<meta name="twitter:title" content="${esc(t)}">`);
+        if (d) lines.push(`<meta name="twitter:description" content="${esc(d)}">`);
+        if (im) lines.push(`<meta name="twitter:image" content="${esc(im)}">`);
+
+        // Wrap with head tags to show context
+        const finalCode = `<html lang="${esc(lang)}">\n<head>\n  ${lines.join('\n  ')}\n</head>`;
+        $('out').textContent = finalCode;
+
+        // --- Update Previews ---
         
-        return lines.join('\n');
+        // Google Preview
+        let domain = 'example.com';
+        try { if(u) domain = new URL(u).hostname.replace('www.',''); } catch(e){}
+        
+        $('p-url').textContent = u || 'https://example.com';
+        $('p-title').textContent = t || 'Awesome Page Title';
+        $('p-desc').textContent = d || 'Write a short, compelling summary to increase your click-through rate...';
+
+        // Facebook Preview
+        $('fb-domain').textContent = domain.toUpperCase();
+        $('fb-title').textContent = t || 'Awesome Page Title';
+        $('fb-desc').textContent = d || 'Short, compelling summary appears here…';
+        $('fb-img').src = im || defaultImg;
+
+        // Twitter Preview
+        $('tw-domain').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg> ${domain}`;
+        $('tw-title').textContent = t || 'Awesome Page Title';
+        $('tw-desc').textContent = d || 'Short, compelling summary appears here…';
+        $('tw-img').src = im || defaultImg;
+        
+        // Handle image loading errors gracefully
+        $('fb-img').onerror = function() { this.src = defaultImg; };
+        $('tw-img').onerror = function() { this.src = defaultImg; };
       }
 
-      // Live Google SERP preview updater
-      function preview() {
-        $('p-url').textContent = $('m-url').value || 'https://example.com';
-        $('p-title').textContent = $('m-title').value || 'Awesome Page Title';
-        $('p-desc').textContent = $('m-desc').value || 'Short summary appears here…';
-      }
-
-      $('gen-btn').addEventListener('click', () => { 
-        $('out').textContent = build(); 
-        preview(); 
-        window.toast('Generated'); 
+      // Bind events to all inputs
+      const inputs = document.querySelectorAll('input, textarea, select');
+      inputs.forEach(input => {
+        input.addEventListener('input', updateUI);
       });
 
+      // Copy Button
       $('copy-btn').addEventListener('click', async () => {
-        const html = build();
-        if (!html) { 
-          window.toast('Generate first', 'error'); 
-          return; 
-        }
-        await navigator.clipboard.writeText(html); 
-        window.toast('Copied HTML to clipboard');
+        const html = $('out').textContent;
+        await navigator.clipboard.writeText(html);
+        if(window.toast) window.toast('Copied HTML to clipboard');
+        else alert('Copied HTML to clipboard');
       });
 
-      // Bind live preview events
-      ['m-title', 'm-desc', 'm-url'].forEach(id => $(id).addEventListener('input', preview));
-      
-      // Init preview state
-      preview();
+      // Reset Button
+      $('reset-btn').addEventListener('click', () => {
+        inputs.forEach(input => {
+          if(input.type !== 'color' && input.type !== 'select-one') input.value = '';
+        });
+        $('m-lang').value = 'en';
+        $('m-theme').value = '#ffffff';
+        $('m-robots').selectedIndex = 0;
+        updateUI();
+        if(window.toast) window.toast('Fields reset');
+      });
+
+      // Initialize
+      updateUI();
     })();
   </script>
 </body>
