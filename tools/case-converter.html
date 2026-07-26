@@ -4,44 +4,47 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Case Converter | The27LINKS</title>
-  
-  <!-- Enhanced Meta Description for SEO -->
-  <meta name="description" content="Free online case converter tool. Instantly convert your text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, and kebab-case." />
+  <meta name="description" content="Convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case and kebab-case instantly. Free online text case changer." />
   <meta name="keywords" content="case converter, text case changer, uppercase to lowercase, title case converter, camelcase generator, snake case, sentence case, the27links">
   
-  <!-- Canonical Tag: Ensure this EXACTLY matches your final deployed URL structure -->
   <link rel="canonical" href="https://the27links.in/tools/case-converter" />
   
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/styles.css" />
     
-  <!-- Google AdSense Script -->
+  <!-------------------- Code To Display Google Ads On Website -------------------->
+  <!-- You only need this global script once in the head. It allows AdSense to enable Auto-Ads if you turn them on -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7448142804909345" crossorigin="anonymous"></script>
   
-  <!-- JSON-LD Structured Data Schema -->
+  <!-------------------- JSON-LD Structured Data Schema -------------------->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "@id": "https://the27links.in/tools/case-converter",
-    "name": "Case Converter Tool",
+    "name": "Case Converter",
     "url": "https://the27links.in/tools/case-converter",
-    "applicationCategory": "UtilityApplication",
+    "applicationCategory": "BusinessApplication",
     "operatingSystem": "All",
-    "browserRequirements": "Requires HTML5 and JavaScript support",
+    "browserRequirements": "Requires HTML5 support",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "INR"
     },
-    "description": "A free online tool to convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case and kebab-case instantly."
+    "author": {
+      "@type": "Person",
+      "name": "Robert Storm"
+    },
+    "description": "Convert text between UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case and kebab-case."
   }
   </script>
   
-  <!-- Google Analytics Tag -->
+  <!-------------------- Google Analytics Tag -------------------->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKGLM2P6G3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -49,24 +52,6 @@
     gtag('js', new Date());
     gtag('config', 'G-WKGLM2P6G3');
   </script>
-  
-  <style>
-    /* Inline styles for the new content section - move to styles.css if preferred */
-    .seo-content {
-      margin-top: 40px;
-      padding: 20px;
-      background: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      line-height: 1.6;
-    }
-    .seo-content h2 { font-size: 1.5rem; margin-top: 24px; margin-bottom: 12px; }
-    .seo-content h3 { font-size: 1.25rem; margin-top: 20px; margin-bottom: 10px; }
-    .seo-content p { margin-bottom: 16px; color: #4a5568; }
-    .seo-content ul { margin-left: 20px; margin-bottom: 16px; color: #4a5568; }
-    .seo-content li { margin-bottom: 8px; }
-    .stats-bar { font-size: 0.875rem; color: #718096; margin-top: 8px; text-align: right; }
-  </style>
 </head>
 
 <body data-testid="case-converter-page">
@@ -76,10 +61,10 @@
   <section class="page-header">
     <div class="container">
       <div class="breadcrumbs">
-        <a href="../index">Home</a> &nbsp;/&nbsp; <a href="../tools">Tools</a> &nbsp;/&nbsp; Case Converter
+        <a href="../index.html">Home</a> &nbsp;/&nbsp; <a href="../tools.html">Tools</a> &nbsp;/&nbsp; Case Converter
       </div>
-      <h1>Online Case Converter</h1>
-      <p>Transform text into any common letter case instantly. Fix capitalization errors without retyping.</p>
+      <h1>Case Converter</h1>
+      <p>Transform text into any common letter case — instantly.</p>
     </div>
   </section>
 
@@ -88,10 +73,12 @@
       <div class="layout">
         
         <div class="tool-panel">
-          <h2>Your Text</h2>
+          <h2>Your text</h2>
           <div class="form-row">
-            <textarea id="txt" placeholder="Paste or type your text here..." data-testid="case-input" rows="8"></textarea>
-            <div class="stats-bar">
+            <textarea id="txt" placeholder="Paste your text…" data-testid="case-input" rows="6"></textarea>
+            
+            <!-- Added utility feature: Character & Word count (Helps with the "Low Value Content" issue) -->
+            <div style="font-size: 0.85rem; color: #718096; text-align: right; margin-top: 8px;">
               <span id="char-count">0</span> characters | <span id="word-count">0</span> words
             </div>
           </div>
@@ -110,19 +97,33 @@
           </div>
 
           <div class="actions-bar" style="margin-top: 24px;">
-            <button class="btn btn-primary" id="copy-btn" data-testid="case-copy">Copy Result</button>
+            <button class="btn btn-ghost" id="copy-btn" data-testid="case-copy">Copy result</button>
             <button class="btn btn-ghost" id="clear-btn">Clear</button>
           </div>
           
-          <div class="output-preview" id="out" data-testid="case-output" style="min-height: 100px; margin-top: 16px; padding: 12px; background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 4px;"></div>
+          <div class="output-preview" id="out" data-testid="case-output" style="min-height: 120px; margin-top: 16px;"></div>
         </div>
+
+        <aside class="tool-sidebar">
+          
+          <!-- Personal Ad/Clip Slot: Completely separate from AdSense -->
+          <div class="ad-slot" style="overflow: hidden; border-radius: 8px; background: #000;">
+            <!-- Replace 'your-promo.mp4' with the actual path to your video clip -->
+            <!-- 'muted playsinline autoplay loop' ensures it plays automatically like an animated banner without annoying the user -->
+            <video width="100%" height="auto" autoplay loop muted playsinline>
+              <source src="../assets/media/your-promo.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          
           <div class="sidebar-card">
-            <h4>Pro Tip</h4>
-            <p>For file naming, use <strong>kebab-case</strong> for URLs and <strong>snake_case</strong> for database variables to ensure maximum compatibility.</p>
+            <h4>Pro tip</h4>
+            <p>For file naming, use kebab-case for URLs and snake_case for variables.</p>
           </div>
           <div class="sidebar-card">
-            <h4>Related Tools</h4>
+            <h4>Related tools</h4>
             <ul>
+              <!-- Kept the .html extension as requested -->
               <li><a href="word-counter.html">Word Counter</a></li>
               <li><a href="meta-tag-generator.html">Meta Tag Generator</a></li>
             </ul>
@@ -130,42 +131,22 @@
         </aside>
 
       </div>
-
-      <!-- ADDED FOR ADSENSE APPROVAL: Comprehensive Text Content -->
-      <article class="seo-content">
-        <h2>About the Free Case Converter Tool</h2>
-        <p>Accidentally left your caps lock on? Need to format a title for an essay, or generate variable names for a programming project? The <strong>The27LINKS Case Converter</strong> is a free, easy-to-use online utility that allows you to change the capitalization of your text instantly without having to retype a single word.</p>
+      
+      <!-- SEO & Content Section: Uses your existing .tool-panel class so it matches your current UI perfectly -->
+      <div class="tool-panel" style="margin-top: 32px;">
+        <h2>About the Case Converter</h2>
+        <p style="margin-bottom: 16px;">The27LINKS Case Converter is a free utility designed to instantly fix capitalization errors and format text for coding, writing, and data entry. Because this tool runs entirely in your browser using local JavaScript, your text remains private and is never uploaded to any servers.</p>
         
-        <p>Simply paste your text into the box above, click on the format you need, and copy the correctly formatted text back to your clipboard. It is entirely browser-based, meaning your data never leaves your computer, ensuring complete privacy.</p>
-
-        <h2>Understanding the Different Text Cases</h2>
-        <p>Our tool supports multiple case formats used in writing, editing, and programming. Here is a breakdown of what each option does:</p>
-
-        <ul>
-          <li><strong>Sentence case:</strong> Capitalizes only the first letter of each sentence and leaves the rest in lowercase, standard for regular paragraph writing. <em>(Example: This is a sentence.)</em></li>
-          <li><strong>UPPERCASE:</strong> Converts every single letter to a capital letter. Often used for warnings, headlines, or acronyms. <em>(Example: THIS IS UPPERCASE.)</em></li>
-          <li><strong>lowercase:</strong> Converts all text to small letters, stripping away any capitalization. <em>(Example: this is lowercase.)</em></li>
-          <li><strong>Title Case:</strong> Capitalizes the first letter of every word. Perfect for blog post titles, book covers, and formal headings. <em>(Example: This Is Title Case.)</em></li>
-          <li><strong>camelCase:</strong> Removes spaces between words and capitalizes the first letter of each word except the first one. Highly used in JavaScript and Java programming. <em>(Example: thisIsCamelCase)</em></li>
-          <li><strong>PascalCase:</strong> Similar to camelCase, but the very first letter is also capitalized. Often used for class names in programming. <em>(Example: ThisIsPascalCase)</em></li>
-          <li><strong>snake_case:</strong> Replaces all spaces with underscores and makes all letters lowercase. Commonly used in Python, database naming conventions, and file names. <em>(Example: this_is_snake_case)</em></li>
-          <li><strong>kebab-case:</strong> Replaces spaces with hyphens. This is the absolute best format for URLs (web addresses) and image file names for SEO purposes. <em>(Example: this-is-kebab-case)</em></li>
-          <li><strong>aLtErNaTiNg & iNVERTED:</strong> Fun formats primarily used for social media, memes, or reversing accidental caps-lock typing.</li>
+        <h3 style="margin-bottom: 12px; margin-top: 24px;">Formatting Options Explained</h3>
+        <ul style="margin-left: 20px; margin-bottom: 24px; line-height: 1.6;">
+          <li><strong>Sentence case:</strong> Capitalizes the first letter of a sentence.</li>
+          <li><strong>UPPERCASE & lowercase:</strong> Converts all characters uniformly.</li>
+          <li><strong>Title Case:</strong> Capitalizes the first letter of every word, ideal for blog post titles.</li>
+          <li><strong>camelCase & PascalCase:</strong> Removes spaces and capitalizes words. Standard in JavaScript and object-oriented programming.</li>
+          <li><strong>snake_case:</strong> Replaces spaces with underscores. Popular in Python and database architectures.</li>
+          <li><strong>kebab-case:</strong> Replaces spaces with hyphens. The standard format for URLs and SEO-friendly file naming.</li>
         </ul>
-
-        <h2>Why Use an Online Case Changer?</h2>
-        <p>Manually fixing capitalization errors is tedious and wastes time. Whether you are a student formatting an essay, a marketer writing ad copy, or a developer formatting code, a text case changer automates the process. Furthermore, consistent capitalization improves readability and ensures you meet specific style guides (like APA for essays, or standard naming conventions for coding).</p>
-
-        <h2>Frequently Asked Questions</h2>
-        <h3>Is this tool free to use?</h3>
-        <p>Yes, the case converter is 100% free to use with no hidden limits or subscriptions.</p>
-        
-        <h3>Does my text get saved to your servers?</h3>
-        <p>No. All text conversion happens locally in your web browser using JavaScript. We do not store, track, or save any text you paste into the input box.</p>
-        
-        <h3>How do I copy the converted text?</h3>
-        <p>Once you click your desired case format, the converted text will appear in the result box. Simply click the "Copy Result" button below the options to instantly copy the formatted text to your clipboard.</p>
-      </article>
+      </div>
 
     </div>
   </section>
@@ -181,11 +162,10 @@
       const charCount = document.getElementById('char-count');
       const wordCount = document.getElementById('word-count');
       
-      // Update character and word counts in real-time
+      // Live Word and Character count logic
       t.addEventListener('input', () => {
         const text = t.value;
         charCount.textContent = text.length;
-        // Calculate words by matching non-whitespace character blocks
         const words = text.match(/\b[-?(\w+)?]+\b/gi);
         wordCount.textContent = words ? words.length : 0;
       });
@@ -222,17 +202,11 @@
           try {
             await navigator.clipboard.writeText(o.textContent); 
             if (typeof window.toast === 'function') {
-                window.toast('Copied to clipboard!'); 
-            } else {
-                alert('Copied to clipboard!');
+                window.toast('Copied'); 
             }
           } catch (err) {
-            console.error('Failed to copy text: ', err);
+            console.error('Failed to copy text', err);
           }
-        } else {
-            if (typeof window.toast === 'function') {
-                window.toast('Nothing to copy', 'error'); 
-            }
         }
       });
       
