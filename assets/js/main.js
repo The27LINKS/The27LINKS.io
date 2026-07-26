@@ -8,7 +8,6 @@
     localStorage.setItem('t27-theme', cur);
   };
 
-
   // ---------- Toast ----------
   function ensureToastHost() {
     let host = document.querySelector('.toast-host');
@@ -41,8 +40,9 @@
     if (!mount || !window.TOOLS) return;
     
     const limit = opts.limit || window.TOOLS.length;
+    // UPDATED: Removed .html for clean URLs
     mount.innerHTML = window.TOOLS.slice(0, limit).map(t => `
-      <a href="./tools/${t.slug}.html" class="tool-card stagger-item" data-category="${t.category}" data-testid="tool-card-${t.slug}" data-slug="${t.slug}" data-name="${t.name.toLowerCase()}" data-tags="${t.tags.join(',')}">
+      <a href="/tools/${t.slug}" class="tool-card stagger-item" data-category="${t.category}" data-testid="tool-card-${t.slug}" data-slug="${t.slug}" data-name="${t.name.toLowerCase()}" data-tags="${t.tags.join(',')}">
         <div class="icon">${iconFor(t.icon)}</div>
         <h3>${t.name}</h3>
         <p>${t.desc}</p>
@@ -102,8 +102,9 @@
         const q = input.value.trim().toLowerCase();
         if (!q) return;
         const hit = window.TOOLS.find(t => t.name.toLowerCase().includes(q) || t.tags.some(tg => tg.includes(q)));
-        if (hit) location.href = '/tools/' + hit.slug + '.html';
-        else location.href = '/tools.html?q=' + encodeURIComponent(q);
+        // UPDATED: Removed .html for clean URLs
+        if (hit) location.href = '/tools/' + hit.slug;
+        else location.href = '/tools?q=' + encodeURIComponent(q);
       }
     });
   };
@@ -114,6 +115,7 @@
     const path = location.pathname.replace(/\/$/, '') || '/';
     document.querySelectorAll('.main-nav a').forEach(a => {
       const href = a.getAttribute('href');
+      // Still strips out .html just in case you missed removing it in the DOM
       if ((href === '/' && path === '/') || (href !== '/' && path.startsWith(href.replace('.html', '')))) {
         a.classList.add('active');
       }
@@ -174,40 +176,42 @@
     setTimeout(() => URL.revokeObjectURL(url), 2000);
   };
 })();
- document.addEventListener('DOMContentLoaded', () => {
-    const themeBtn = document.querySelector('[data-testid="theme-toggle-btn"]');
-    const menuBtn = document.querySelector('[data-testid="menu-toggle-btn"]');
-    
-    if (themeBtn && typeof toggleTheme === 'function') {
-      themeBtn.addEventListener('click', toggleTheme);
-    }
-    
-    if (menuBtn && typeof toggleNav === 'function') {
-      menuBtn.addEventListener('click', toggleNav);
-    }
 
-    if (typeof renderTools === 'function') {
-      renderTools('tools-grid', { limit: 6 });
-    }
-    
-    if (typeof initHomeSearch === 'function') {
-      initHomeSearch();
-    }
-  });
+document.addEventListener('DOMContentLoaded', () => {
+  const themeBtn = document.querySelector('[data-testid="theme-toggle-btn"]');
+  const menuBtn = document.querySelector('[data-testid="menu-toggle-btn"]');
+  
+  if (themeBtn && typeof toggleTheme === 'function') {
+    themeBtn.addEventListener('click', toggleTheme);
+  }
+  
+  if (menuBtn && typeof toggleNav === 'function') {
+    menuBtn.addEventListener('click', toggleNav);
+  }
 
-  // Theme selector dropdown logic
+  if (typeof renderTools === 'function') {
+    renderTools('tools-grid', { limit: 6 });
+  }
+  
+  if (typeof initHomeSearch === 'function') {
+    initHomeSearch();
+  }
+
+  // Theme selector dropdown logic - Wrapped in safety check to prevent null errors
   const themeSelect = document.getElementById('theme-select');
   const htmlElement = document.documentElement;
 
-  const savedTheme = localStorage.getItem('theme') || 'system';
-  applyTheme(savedTheme);
-  themeSelect.value = savedTheme;
+  if (themeSelect) {
+    const savedTheme = localStorage.getItem('theme') || 'system';
+    applyTheme(savedTheme);
+    themeSelect.value = savedTheme;
 
-  themeSelect.addEventListener('change', (e) => {
-    const selectedTheme = e.target.value;
-    applyTheme(selectedTheme);
-    localStorage.setItem('theme', selectedTheme);
-  });
+    themeSelect.addEventListener('change', (e) => {
+      const selectedTheme = e.target.value;
+      applyTheme(selectedTheme);
+      localStorage.setItem('theme', selectedTheme);
+    });
+  }
 
   function applyTheme(theme) {
     if (theme === 'system') {
@@ -216,3 +220,4 @@
       htmlElement.setAttribute('data-theme', theme);
     }
   }
+});
