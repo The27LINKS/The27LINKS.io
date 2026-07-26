@@ -1,29 +1,78 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Image to PDF — Combine images into a PDF | The 27 Links</title>
-<meta name="description" content="Turn multiple JPG, PNG or WebP images into a single PDF in your browser. Reorder, preview and download." />
-<link rel="canonical" href="https://the27links.in/tools/image-to-pdf.html" />
-<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/css/styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Image to PDF — Combine images into a PDF | The27LINKS</title>
+  
+  <meta name="description" content="Turn multiple JPG, PNG or WebP images into a single PDF directly in your browser. Reorder, preview, and download securely." />
+  <meta name="keywords" content="image to pdf, convert jpg to pdf, png to pdf converter, combine images to pdf, make pdf from photos, browser based pdf generator, the27links">
+  
+  <!-- Clean Canonical Tag -->
+  <link rel="canonical" href="https://the27links.in/tools/image-to-pdf" />
+  
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <!-- Fonts including Caveat -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7448142804909345" crossorigin="anonymous"></script>
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "@id": "https://the27links.in/tools/image-to-pdf",
+    "name": "Image to PDF Converter",
+    "url": "https://the27links.in/tools/image-to-pdf",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires HTML5 and PDF-lib support",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Robert Storm"
+    },
+    "description": "Turn multiple JPG, PNG or WebP images into a single PDF in your browser. Reorder, preview and download."
+  }
+  </script>
+
+  <!-- Google Analytics Tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKGLM2P6G3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WKGLM2P6G3');
+  </script>
 </head>
 <body data-testid="image-to-pdf-page">
+
 <div data-include="/partials/header.html"></div>
+
 <section class="page-header">
   <div class="container">
-    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/tools.html">Tools</a> / Image to PDF</div>
+    <!-- Clean Breadcrumb Links -->
+    <div class="breadcrumbs"><a href="/">Home</a> / <a href="/tools">Tools</a> / Image to PDF</div>
     <h1>Image to PDF</h1>
     <p>Compose JPG, PNG or WebP images into a single PDF — each image becomes one page.</p>
   </div>
 </section>
+
 <section class="tool-shell">
   <div class="container">
     <div class="layout">
+      
       <div class="tool-panel">
         <h2>Upload images</h2>
         <p class="hint">Drag rows in the list to reorder. JPG, PNG and WebP supported.</p>
@@ -37,11 +86,20 @@
         <div class="form-row-2" style="margin-top: 16px;">
           <div class="form-row">
             <label>Page size</label>
-            <select id="size"><option value="fit">Fit to image</option><option value="a4">A4 portrait</option><option value="letter">US Letter</option></select>
+            <select id="size">
+              <option value="fit">Fit to image</option>
+              <option value="a4">A4 portrait</option>
+              <option value="letter">US Letter</option>
+            </select>
           </div>
           <div class="form-row">
             <label>Margin</label>
-            <select id="margin"><option value="0">None</option><option value="20">Small (20 pt)</option><option value="40">Medium (40 pt)</option><option value="60">Large (60 pt)</option></select>
+            <select id="margin">
+              <option value="0">None</option>
+              <option value="20">Small (20 pt)</option>
+              <option value="40">Medium (40 pt)</option>
+              <option value="60">Large (60 pt)</option>
+            </select>
           </div>
         </div>
 
@@ -51,15 +109,61 @@
         </div>
         <div class="result-box" id="result" data-testid="image-to-pdf-result"></div>
       </div>
+      
       <aside class="tool-sidebar">
-        <div class="ad-slot">Advertisement<br/>300 × 600</div>
-        <div class="sidebar-card"><h4>Tips</h4><p>"Fit to image" makes each page match the source dimensions — great for scanned docs. A4/Letter center and scale the image.</p></div>
-        <div class="sidebar-card"><h4>Related tools</h4><ul><li><a href="/tools/pdf-to-image.html">PDF to Image</a></li><li><a href="/tools/image-compress.html">Image Compress</a></li></ul></div>
+        <!-- Personal Ad/Clip Slot: Video Promo -->
+        <div class="ad-slot" style="overflow: hidden; border-radius: 8px; background: #000;">
+          <!-- Replace 'your-promo.mp4' with the actual path to your video clip -->
+          <video width="100%" height="auto" autoplay loop muted playsinline>
+            <source src="/assets/media/your-promo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        
+        <div class="sidebar-card">
+          <h4>Tips</h4>
+          <p>"Fit to image" makes each page match the source dimensions — great for scanned docs. A4/Letter center and scale the image.</p>
+        </div>
+        <div class="sidebar-card">
+          <h4>Related tools</h4>
+          <ul>
+            <!-- Clean Sidebar Links -->
+            <li><a href="/tools/pdf-to-image">PDF to Image</a></li>
+            <li><a href="/tools/image-compress">Image Compress</a></li>
+          </ul>
+        </div>
       </aside>
+      
     </div>
+    
+    <!-- SEO & Content Section for AdSense Approval -->
+    <div class="tool-panel" style="margin-top: 32px;">
+      <h2>About the Free Image to PDF Converter</h2>
+      <p style="margin-bottom: 16px;">Need to compile multiple photos, scanned documents, or ID cards into a single file? The <strong>The27LINKS Image to PDF</strong> tool allows you to merge multiple images into one neat, highly-compatible PDF document. It takes just seconds to create polished PDF files ready for email, printing, or official submissions.</p>
+      
+      <p style="margin-bottom: 16px;"><strong>100% Private & Secure:</strong> Many online PDF tools require you to upload your sensitive documents to a remote server. We value your privacy. Our tool utilizes advanced client-side processing, meaning the PDF compilation happens entirely within your device's web browser. Your photos are never uploaded or stored anywhere.</p>
+
+      <h3 style="margin-bottom: 12px; margin-top: 24px;">How to Create Your PDF</h3>
+      <ul style="margin-left: 20px; margin-bottom: 24px; line-height: 1.6;">
+        <li><strong>Upload Your Images:</strong> Drag and drop your JPG, PNG, or WebP files into the box. You can upload multiple files at once.</li>
+        <li><strong>Rearrange the Order:</strong> Grab any row in the file list and drag it up or down to set the exact page order for your final document.</li>
+        <li><strong>Choose Formatting:</strong> Select "Fit to image" if you want the PDF pages to perfectly wrap your images. Alternatively, choose "A4" or "US Letter" to place your images centered onto standard printable page sizes with optional margins.</li>
+      </ul>
+
+      <h3 style="margin-bottom: 12px;">Frequently Asked Questions</h3>
+      <p style="margin-bottom: 8px;"><strong>Are there any file size limits?</strong></p>
+      <p style="margin-bottom: 16px; color: #4a5568;">Because all processing uses your own device's memory, there are no artificial file size limits. However, if you upload hundreds of high-resolution photos at once, the generation process might slow down depending on your computer's RAM.</p>
+
+      <p style="margin-bottom: 8px;"><strong>Does this reduce the quality of my images?</strong></p>
+      <p style="color: #4a5568;">No. The images are embedded into the PDF document in their original quality. If your final PDF ends up being too large to email, we recommend using our <a href="/tools/image-compress" style="color: #3182ce; text-decoration: underline;">Image Compressor</a> on your files <em>before</em> converting them to a PDF.</p>
+    </div>
+
   </div>
 </section>
+
+<!-- Retained .html ONLY for data-include so your JS fetching does not break -->
 <div data-include="/partials/footer.html"></div>
+
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/partials.js"></script>
 <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
