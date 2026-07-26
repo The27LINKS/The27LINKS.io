@@ -12,4 +12,5 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://the27links.in/sitemap.xml
+Sitemap: https://the27links.in/sitemap
+
