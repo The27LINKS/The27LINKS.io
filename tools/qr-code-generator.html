@@ -4,19 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>QR Code Generator | The27LINKS</title>
-  <meta name="description" content="Generate QR codes for URLs, text, Wi-Fi credentials and contact cards. Download as PNG — everything runs in your browser." />
+  
+  <meta name="description" content="Generate custom QR codes for URLs, text, Wi-Fi credentials and contact cards. Download as PNG — fast, private, and runs entirely in your browser." />
   <meta name="keywords" content="qr code generator, create qr code online, free qr maker, url to qr code, wifi qr code generator, vcard qr code maker, text to qr code, download qr code png, private qr code creator, secure qr generator, browser based qr maker, the27links">
+  
+  <!-- Clean Canonical Tag -->
   <link rel="canonical" href="https://the27links.in/tools/qr-code-generator" />
   
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <!-- Added Caveat Font + Existing Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/styles.css" />
    
-<!-------------------- Code To Display Google Ads On Website -------------------->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7448142804909345"
-     crossorigin="anonymous"></script>
+  <!-------------------- Code To Display Google Ads On Website -------------------->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7448142804909345" crossorigin="anonymous"></script>
   
   <style>
     /* Prevent the canvas from overflowing on mobile */
@@ -52,46 +57,52 @@
       to { transform: rotate(360deg); }
     }
   </style>
+
+  <!-------------------- JSON-LD Structured Data Schema -------------------->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "@id": "https://the27links.in/tools/qr-code-generator",
+    "name": "QR Code Generator",
+    "url": "https://the27links.in/tools/qr-code-generator",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires HTML5 support",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Robert Storm"
+    },
+    "description": "Generate QR codes for URLs, text, Wi-Fi credentials and contact cards. Download as PNG — everything runs in your browser."
+  }
+  </script>
+  
+  <!-------------------- Google Analytics Tag -------------------->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKGLM2P6G3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WKGLM2P6G3');
+  </script>
 </head>
 
-      <!-------------------- JSON-LD Structured Data Schema -------------------->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "@id": "https://the27links.in/tools/qr-code-generator",
-  "name": "QR Code Generator",
-  "url": "https://the27links.in/tools/qr-code-generator",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "All",
-  "browserRequirements": "Requires HTML5 support",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "INR"
-  },
-  "description": "Generate QR codes for URLs, text, Wi-Fi credentials and contact cards. Download as PNG — everything runs in your browser."
-}
-</script>
-  
-<!-------------------- Google Anylitics Tag -------------------->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WKGLM2P6G3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-WKGLM2P6G3');
-</script>
-
-
-  
 <body data-testid="qr-page">
 
+  <!-- Retained .html ONLY for data-include so your JS fetching does not break -->
   <div data-include="../partials/header.html"></div>
 
   <section class="page-header">
     <div class="container">
+      <div class="breadcrumbs">
+        <!-- Clean Breadcrumb Links -->
+        <a href="../">Home</a> &nbsp;/&nbsp; <a href="../tools">Tools</a> &nbsp;/&nbsp; QR Code Generator
+      </div>
       <h1>QR Code Generator</h1>
       <p>Type your content, tweak the style, download a clean PNG.</p>
     </div>
@@ -160,9 +171,16 @@
         </div>
 
         <aside class="tool-sidebar">
-          <a href="https://the27links.in" rel="noopener noreferrer" class="ad-slot active-ad" data-testid="ad-slot">
-            <img src="../assets/gif/Animation.gif" alt="Advertisement" />
-         </a>
+          
+          <!-- Personal Ad/Clip Slot: Video Promo -->
+          <div class="ad-slot" style="overflow: hidden; border-radius: 8px; background: #000;">
+            <!-- Replace 'your-promo.mp4' with the actual path to your video clip -->
+            <video width="100%" height="auto" autoplay loop muted playsinline>
+              <source src="../assets/media/your-promo.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          
           <div class="sidebar-card">
             <h4>Pro tip</h4>
             <p>Keep foreground dark on a white background for reliable scanning. Test your code with your phone camera before printing.</p>
@@ -170,16 +188,41 @@
           <div class="sidebar-card">
             <h4>Related tools</h4>
             <ul>
-              <li><a href="meta-tag-generator.html">Meta Tag Generator</a></li>
-              <li><a href="image-convert.html">Image Convert</a></li>
+              <!-- Clean Sidebar Links -->
+              <li><a href="meta-tag-generator">Meta Tag Generator</a></li>
+              <li><a href="image-convert">Image Convert</a></li>
             </ul>
           </div>
         </aside>
 
       </div>
+      
+      <!-- SEO & Content Section for AdSense Approval -->
+      <div class="tool-panel" style="margin-top: 32px;">
+        <h2>About the Free QR Code Generator</h2>
+        <p style="margin-bottom: 16px;">Quick Response (QR) codes are the easiest way to connect the physical world to the digital one. The <strong>The27LINKS QR Code Generator</strong> allows you to instantly create scannable codes for your website, contact information, or Wi-Fi network. Unlike many other online generators that charge fees or expire your links, our tool creates static, permanent QR codes completely for free.</p>
+        
+        <p style="margin-bottom: 16px;"><strong>100% Private & Secure:</strong> All QR codes are generated locally inside your web browser. This means your private Wi-Fi passwords, personal phone numbers, and emails are never sent to or stored on our servers.</p>
+
+        <h3 style="margin-bottom: 12px; margin-top: 24px;">What Can You Create?</h3>
+        <ul style="margin-left: 20px; margin-bottom: 24px; line-height: 1.6;">
+          <li><strong>Plain Text & URLs:</strong> Paste a link to your website, YouTube channel, or digital menu. When scanned, it instantly opens the link in the user's browser.</li>
+          <li><strong>Wi-Fi Networks:</strong> Tired of spelling out your complex Wi-Fi password for guests? Enter your SSID and password here. When guests scan the printed code, their phones will automatically connect to your network without typing a thing.</li>
+          <li><strong>Contact Cards (vCard):</strong> Generate a digital business card. By scanning the code, your name, phone number, email, and company will instantly be added to the scanner's phone contacts.</li>
+        </ul>
+
+        <h3 style="margin-bottom: 12px;">Frequently Asked Questions</h3>
+        <p style="margin-bottom: 8px;"><strong>Will my QR Code ever expire?</strong></p>
+        <p style="margin-bottom: 16px; color: #4a5568;">No! The QR codes generated by this tool are "Static." They contain the actual data (like the URL or text) hardcoded into the pattern. Because they don't rely on redirect links, they will work forever.</p>
+
+        <p style="margin-bottom: 8px;"><strong>Can I change the color of the QR code?</strong></p>
+        <p style="color: #4a5568;">Yes, you can use the "Foreground color" picker to match your brand. However, please note that QR scanners rely on high contrast. Always use a dark color for the QR code against a light or white background, otherwise, phone cameras might fail to read it.</p>
+      </div>
+
     </div>
   </section>
 
+  <!-- Retained .html ONLY for data-include so your JS fetching does not break -->
   <div data-include="../partials/footer.html"></div>
 
   <script src="../assets/js/main.js"></script>
@@ -193,9 +236,9 @@
       
       // UI Tab Switching
       typeSel.addEventListener('change', () => {
-        document.getElementById('f-text').style.display = typeSel.value === 'text' ? '' : 'none';
-        document.getElementById('f-wifi').style.display = typeSel.value === 'wifi' ? '' : 'none';
-        document.getElementById('f-vcard').style.display = typeSel.value === 'vcard' ? '' : 'none';
+        document.getElementById('f-text').style.display = typeSel.value === 'text' ? 'block' : 'none';
+        document.getElementById('f-wifi').style.display = typeSel.value === 'wifi' ? 'block' : 'none';
+        document.getElementById('f-vcard').style.display = typeSel.value === 'vcard' ? 'block' : 'none';
       });
 
       // Construct the specialized QR data string based on selected tab
