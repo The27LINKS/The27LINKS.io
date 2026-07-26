@@ -4,8 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PDF Merge | The27LINKS</title>
+  
   <meta name="description" content="Merge multiple PDF files into one, in seconds. 100% private — files never leave your browser. Drag, reorder and download — no sign-up." />
-  <meta name="keywords" content="pdf merge, combine pdf, join pdf, merge pdf online, free pdf merger" />
+  <meta name="keywords" content="pdf merge, combine pdf, join pdf, merge pdf online, free pdf merger, private pdf joiner, secure pdf tool, browser based pdf merge, the27links" />
+  
+  <!-- Clean Canonical Tag -->
   <link rel="canonical" href="https://the27links.in/tools/pdf-merge" />
   
   <meta property="og:title" content="PDF Merge — The27LINKS" />
@@ -15,53 +18,60 @@
   <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+  <!-- Fonts including Caveat -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/styles.css" />
     
-<!-------------------- Code To Display Google Ads On Website -------------------->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7448142804909345"
-     crossorigin="anonymous"></script>
+  <!-- Code To Display Google Ads On Website -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7448142804909345" crossorigin="anonymous"></script>
   
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "@id": "https://the27links.in/tools/pdf-merge",
+    "name": "PDF Merge",
+    "url": "https://the27links.in/tools/pdf-merge",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires HTML5 support",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Robert Storm"
+    },
+    "description": "Merge multiple PDF files into one, in seconds. 100% private — files never leave your browser. Drag, reorder and download — no sign-up."
+  }
+  </script>
   
+  <!-- Google Analytics Tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKGLM2P6G3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WKGLM2P6G3');
+  </script>
 </head>
 
-<!-------------------- JSON-LD Structured Data Schema -------------------->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "@id": "https://the27links.in/tools/pdf-merge",
-  "name": "PDF Merge",
-  "url": "https://the27links.in/tools/pdf-merge",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "All",
-  "browserRequirements": "Requires HTML5 support",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "INR"
-  },
-  "description": "Merge multiple PDF files into one, in seconds. 100% private — files never leave your browser. Drag, reorder and download — no sign-up."
-}
-</script>
-  
-<!-------------------- Google Anylitics Tag -------------------->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WKGLM2P6G3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-WKGLM2P6G3');
-</script>
-  
 <body data-testid="pdf-merge-page">
-<header>
-  <div id="header"></div>
-</header>
+
+  <!-- Retained .html ONLY for data-include so your JS fetching does not break -->
+  <div data-include="../partials/header.html"></div>
 
   <section class="page-header">
     <div class="container">
+      <div class="breadcrumbs">
+        <!-- Clean Breadcrumb Links -->
+        <a href="../">Home</a> &nbsp;/&nbsp; <a href="../tools">Tools</a> &nbsp;/&nbsp; PDF Merge
+      </div>
       <h1>PDF Merge</h1>
       <p>Combine multiple PDFs into a single document. Drag files to reorder, then download — all in your browser.</p>
     </div>
@@ -92,10 +102,18 @@
 
           <div class="result-box" id="result" data-testid="pdf-merge-result"></div>
         </div>
+        
         <aside class="tool-sidebar">
-          <a href="https://the27links.in" el="noopener noreferrer" class="ad-slot active-ad" data-testid="ad-slot">
-            <img src="../assets/gif/Animation.gif" alt="Advertisement" />
-         </a>
+          
+          <!-- Personal Ad/Clip Slot: Video Promo -->
+          <div class="ad-slot" style="overflow: hidden; border-radius: 8px; background: #000;">
+            <!-- Replace 'your-promo.mp4' with the actual path to your video clip -->
+            <video width="100%" height="auto" autoplay loop muted playsinline>
+              <source src="../assets/media/your-promo.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          
           <div class="sidebar-card">
             <h4>Tips</h4>
             <p>Files are merged in the order shown. Drag file rows up or down to reorder.</p>
@@ -103,24 +121,48 @@
           <div class="sidebar-card">
             <h4>Related tools</h4>
             <ul>
-              <li><a href="pdf-split.html">PDF Split</a></li>
-              <li><a href="pdf-compress.html">PDF Compress</a></li>
-              <li><a href="image-to-pdf.html">Image to PDF</a></li>
+              <!-- Clean Sidebar Links -->
+              <li><a href="pdf-split">PDF Split</a></li>
+              <li><a href="pdf-compress">PDF Compress</a></li>
+              <li><a href="image-to-pdf">Image to PDF</a></li>
             </ul>
           </div>
         </aside>
 
       </div>
+
+      <!-- SEO & Content Section for AdSense Approval -->
+      <div class="tool-panel" style="margin-top: 32px;">
+        <h2>About the Free Online PDF Merger</h2>
+        <p style="margin-bottom: 16px;">Whether you are compiling monthly reports, combining scanned receipts for expenses, or joining study notes, the <strong>The27LINKS PDF Merge</strong> tool makes it effortless. Combine unlimited PDF files into one unified, easily shareable document in mere seconds without needing to download expensive software.</p>
+        
+        <p style="margin-bottom: 16px;"><strong>100% Client-Side Privacy:</strong> We understand that your PDFs contain highly sensitive data—from tax returns to legal contracts. Unlike other services that upload your files to a cloud server to merge them, our tool utilizes modern browser technology to merge your PDFs entirely locally. Your files never leave your computer, ensuring absolute privacy and data security.</p>
+
+        <h3 style="margin-bottom: 12px; margin-top: 24px;">How to Combine PDF Files</h3>
+        <ul style="margin-left: 20px; margin-bottom: 24px; line-height: 1.6;">
+          <li><strong>Upload Your Files:</strong> Drag and drop multiple PDF files into the upload box, or click to select them from your computer.</li>
+          <li><strong>Arrange the Order:</strong> The files will merge in the exact order they appear in the list. To change the order, simply click and drag a file's row up or down to reposition it.</li>
+          <li><strong>Merge & Download:</strong> Click the "Merge & download" button. The tool will instantly stitch the documents together and trigger a download of your new, unified PDF.</li>
+        </ul>
+
+        <h3 style="margin-bottom: 12px;">Frequently Asked Questions</h3>
+        <p style="margin-bottom: 8px;"><strong>Is there a limit to how many files I can merge?</strong></p>
+        <p style="margin-bottom: 16px; color: #4a5568;">There are no hard limits on the number of files you can upload. However, because the merging process relies on your device's available memory (RAM), attempting to merge hundreds of extremely large files at once may cause older devices or browsers to lag.</p>
+
+        <p style="margin-bottom: 8px;"><strong>Will merging reduce the quality of my PDFs?</strong></p>
+        <p style="color: #4a5568;">No. The merger performs a native binary join of the PDF pages. It does not rasterize, compress, or convert your pages into images, meaning text remains selectable, vector graphics stay sharp, and original quality is perfectly preserved.</p>
+      </div>
+
     </div>
   </section>
 
-<footer>
-   <div id="footer"></div>
-</footer>
-  
-<script src="../assets/js/tools-data.js"></script>
-<script src="../assets/js/main.js"></script>
-<script src="../assets/js/partials.js"></script>
+  <!-- Retained .html ONLY for data-include so your JS fetching does not break -->
+  <div data-include="../partials/footer.html"></div>
+
+  <!-- Note: Left tools-data.js intact as it was in your original file -->
+  <script src="../assets/js/tools-data.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/partials.js"></script>
   <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
   
   <script>
@@ -179,7 +221,7 @@
       window.makeDropzone(dz, (newFiles) => {
         const pdfs = newFiles.filter(f => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
         if (pdfs.length === 0) { 
-          window.toast('Please drop PDF files only', 'error'); 
+          if (typeof window.toast === 'function') window.toast('Please drop PDF files only', 'error'); 
           return; 
         }
         files = files.concat(pdfs);
@@ -220,7 +262,7 @@
           
           result.classList.add('show');
           result.innerHTML = `<strong>Done!</strong> Merged ${files.length} PDFs (${window.fmtBytes(bytes.byteLength)}) and triggered a download.`;
-          window.toast('Merged and downloaded');
+          if (typeof window.toast === 'function') window.toast('Merged and downloaded');
           
         } catch (e) {
           console.error(e);
