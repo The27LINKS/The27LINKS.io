@@ -26,5 +26,5 @@ window.TOOL_ICONS = {
   case: '<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 19V8l4 11\"/><path d=\"M3 14h4\"/><path d=\"M14 19v-7a3 3 0 0 1 6 0v7\"/><path d=\"M14 15h6\"/></svg>',
   qr: '<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\"/><path d=\"M14 14h3v3h-3zM20 14v3M14 20h3M17 17h4v4\"/></svg>',
   seo: '<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/><path d=\"M8 11h6M11 8v6\"/></svg>',
-  crab: './assets/img/Crab.png',
+  crab: 'https://the27links.in/assets/img/logo.png',
 };
