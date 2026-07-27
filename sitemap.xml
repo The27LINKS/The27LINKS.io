@@ -137,4 +137,12 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+  <!-- Personal Profile -->
+  <url>
+    <loc>https://the27links.in/SumitKumar</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+ 
 </urlset>
