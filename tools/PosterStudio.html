@@ -28,7 +28,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+  <!-- Fonts including Caveat -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/styles.css" />
 <!-- =======================================================================================Import CSS Files=============================================================================== -->
 <link rel="stylesheet" href="https://the27links.in/assets/posterStudio/css/themes.css" />
 <link rel="stylesheet" href="https://the27links.in/assets/posterStudio/css/main.css" />
@@ -68,6 +71,9 @@
   
 </head>
 <body>
+  <!-- Retained .html ONLY for data-include so your JS fetching does not break -->
+<div data-include="/partials/header.html"></div>
+  
 <div id="app" class="app-root">
 <!-- ======================================================================================== TOP TOOLBAR =========================================================================== -->
   <header class="toolbar" data-testid="top-toolbar">
@@ -180,10 +186,13 @@
       <span id="status-canvas-size">1080 × 1080 px</span>
     </div>
   </footer>
+  <div data-include="/partials/footer.html"></div>
 </div>
 
 <div id="toast" class="toast"></div>
 
 <script type="module" src="https://the27links.in/assets/posterStudio/js/app.js"></script>
+  <script src="/assets/js/main.js"></script>
+<script src="/assets/js/partials.js"></script>
 </body>
 </html>
