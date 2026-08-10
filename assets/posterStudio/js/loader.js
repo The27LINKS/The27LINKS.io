@@ -6,11 +6,11 @@ async function fetchJSON(path) {
 }
 export async function loadAll() {
   const [templates, shapes, colors, fonts, defaults] = await Promise.all([
-    fetchJSON('data/templates.json'),
-    fetchJSON('data/shapes.json'),
-    fetchJSON('data/colors.json'),
-    fetchJSON('data/fonts.json'),
-    fetchJSON('data/defaults.json'),
+    fetchJSON('/assets/posterStudio/data/templates.json'),
+    fetchJSON('/assets/posterStudio/data/shapes.json'),
+    fetchJSON('/assets/posterStudio/data/colors.json'),
+    fetchJSON('/assets/posterStudio/data/fonts.json'),
+    fetchJSON('/assets/posterStudio/data/defaults.json'),
   ]);
   return { templates, shapes, colors, fonts, defaults };
 }
