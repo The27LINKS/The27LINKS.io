@@ -1,0 +1,167 @@
+.toolbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 18px;
+  background: var(--bg-elev-1);
+  gap: 12px;
+}
+.toolbar-left, .toolbar-right, .toolbar-center { display: flex; align-items: center; gap: 8px; }
+.toolbar-right { justify-content: flex-end; }
+.toolbar-center { justify-self: center; }
+
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-right: 8px;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+}
+.brand-name em { font-style: normal; color: var(--accent); font-weight: 500; }
+.brand-dot {
+  width: 10px; height: 10px; border-radius: 2px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  box-shadow: 0 0 12px var(--accent-soft);
+}
+
+.zoom-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 4px;
+  margin-left: 8px;
+}
+.zoom-group span {
+  min-width: 42px;
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.zoom-group .icon-btn { width: 26px; height: 26px; }
+
+/* Export dropdown */
+.export-menu { position: relative; }
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 6px;
+  min-width: 220px;
+  box-shadow: var(--shadow-3);
+  display: none;
+  z-index: 100;
+}
+.dropdown.show { display: block; }
+.dropdown button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 13px;
+}
+.dropdown button:hover { background: var(--bg-elev-3); }
+.dropdown-row {
+  padding: 8px 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+.dropdown-row label {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; color: var(--text-muted); font-size: 12px;
+}
+
+/* =========================================
+   TABLET & MOBILE TOOLBAR OVERRIDES (< 1100px)
+   Prevents buttons from squishing on iPads
+========================================= */
+
+/* Hide the hamburger button on large screens */
+@media (min-width: 1101px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  /* Convert grid to a swipeable flex row */
+  .toolbar {
+    display: flex !important;
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap !important;
+    padding: 0 12px !important;
+    -webkit-overflow-scrolling: touch !important; 
+    gap: 16px !important;
+  }
+  
+  /* Hide the scrollbar for a clean UI */
+  .toolbar::-webkit-scrollbar {
+    display: none !important;
+  }
+  
+  /* Prevent the sections from shrinking or hiding */
+  .toolbar-left, 
+  .toolbar-center, 
+  .toolbar-right {
+    display: flex !important;
+    flex-shrink: 0 !important; 
+  }
+  
+  .toolbar-center .select {
+    display: flex !important;
+  }
+
+  /* --- HAMBURGER MENU DROPDOWN LOGIC --- */
+  #desktop-actions {
+    display: none; 
+    position: fixed !important; 
+    top: 56px !important;       
+    right: 16px !important;     
+    background: var(--bg-elev-2) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 12px !important;
+    padding: 8px !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3) !important;
+    z-index: 1000 !important;
+    min-width: 150px !important;
+  }
+
+  #desktop-actions.show {
+    display: flex !important;
+  }
+
+  #desktop-actions .btn {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  #desktop-actions .btn:hover {
+    background: var(--bg-elev-3);
+  }
+
+  /* Show the hamburger button */
+  .mobile-only {
+    display: inline-flex !important;
+  }
+}

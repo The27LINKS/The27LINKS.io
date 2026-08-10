@@ -1,0 +1,158 @@
+.properties-header {
+  margin-bottom: 16px;
+}
+.properties-header h3 {
+  font-size: 15px;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+.properties-header .hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.prop-group {
+  border-top: 1px solid var(--border);
+  padding: 14px 0;
+}
+.prop-group:first-child { border-top: none; padding-top: 0; }
+.prop-group h4 {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+.prop-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.prop-row.single { grid-template-columns: 1fr; }
+.prop-row label {
+  display: flex; flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.prop-row input, .prop-row select, .prop-row textarea {
+  width: 100%;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 12px;
+  color: var(--text);
+  outline: none;
+  font-family: "JetBrains Mono", monospace;
+}
+.prop-row input[type="color"] {
+  height: 30px; padding: 2px; cursor: pointer;
+}
+.prop-row input[type="range"] {
+  padding: 0; height: 4px;
+}
+.prop-row input:focus, .prop-row select:focus, .prop-row textarea:focus {
+  border-color: var(--accent);
+}
+.prop-row textarea { resize: vertical; min-height: 60px; font-family: inherit; }
+
+.prop-buttons {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.prop-buttons button {
+  flex: 1 0 auto;
+  padding: 6px 10px;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 12px;
+  transition: background-color 140ms ease, border-color 140ms ease;
+}
+.prop-buttons button:hover { background: var(--bg-elev-3); }
+.prop-buttons button.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.prop-buttons button.danger { color: var(--danger); }
+.prop-buttons button.danger:hover { border-color: var(--danger); }
+
+
+/* =========================================
+   MOBILE RESPONSIVE: PROPERTIES SHEET
+========================================= */
+@media (max-width: 768px) {
+  /* Add a visual drag handle at the top and center the header */
+  .properties-header {
+    position: relative;
+    padding-top: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .properties-header::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: var(--border-strong);
+    border-radius: 4px;
+  }
+
+  /* Style the close button we injected via JS so it sits nicely in the corner */
+  .mobile-close-btn {
+    top: 4px !important;
+    right: 0 !important;
+    background: var(--bg-elev-2) !important;
+  }
+
+  /* Ensure users can scroll all the way down past the last buttons */
+  .properties-body {
+    padding-bottom: 50px;
+    /* Prevent scrolling this menu from scrolling the page behind it */
+    overscroll-behavior: contain;
+  }
+
+  /* Make inputs, dropdowns, and textareas larger for fingers */
+  .prop-row input, 
+  .prop-row select, 
+  .prop-row textarea {
+    padding: 10px 12px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+
+  /* Larger color picker */
+  .prop-row input[type="color"] {
+    height: 44px;
+    padding: 4px;
+    border-radius: 10px;
+  }
+
+  /* CRITICAL FOR TOUCH: Make range sliders thicker so they are easy to grab */
+  .prop-row input[type="range"] {
+    height: 16px; 
+    margin: 8px 0;
+  }
+
+  /* Taller, wider buttons */
+  .prop-buttons button {
+    padding: 12px 14px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+  
+  /* Give the form groups more breathing room */
+  .prop-group {
+    padding: 18px 0;
+  }
+  
+  .prop-row {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+}

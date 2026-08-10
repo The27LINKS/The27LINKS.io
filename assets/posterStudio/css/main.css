@@ -1,0 +1,148 @@
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 {
+  font-family: "Bricolage Grotesque", ui-sans-serif, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* CRITICAL FOR MOBILE: touch-action: manipulation removes the 300ms tap delay */
+button, input, select, textarea { 
+  font-family: inherit; 
+  color: inherit; 
+  touch-action: manipulation; 
+}
+button { cursor: pointer; }
+
+/* Utility */
+.btn {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 100ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn:hover { background: var(--bg-elev-2); }
+.btn:active { transform: translateY(1px); }
+.btn-ghost { color: var(--text-muted); }
+.btn-ghost:hover { color: var(--text); }
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 18px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 12px var(--accent-soft);
+}
+.btn-primary:hover { background: var(--accent-hover); }
+.icon-btn {
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  transition: background-color 140ms ease, color 140ms ease;
+}
+.icon-btn:hover { background: var(--bg-elev-2); color: var(--text); }
+.icon-btn.active { background: var(--accent-soft); color: var(--accent); }
+
+.select {
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 140ms ease;
+}
+.select:focus { border-color: var(--accent); }
+
+.divider { width: 1px; height: 22px; background: var(--border); margin: 0 6px; }
+
+.dot { width: 3px; height: 3px; border-radius: 999px; background: var(--text-faint); display: inline-block; margin: 0 6px; vertical-align: middle; }
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--bg-elev-3);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  box-shadow: var(--shadow-2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+  z-index: 1000;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Focus indicators */
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Custom selection color */
+::selection { background: var(--accent-soft); color: var(--text); }
+
+/* =========================================
+   MOBILE RESPONSIVE UTILITIES (MAIN)
+========================================= */
+@media (max-width: 768px) {
+  /* Move toast up so it doesn't get covered by the new bottom mobile nav */
+  .toast {
+    bottom: 90px;
+  }
+  
+  /* Slightly larger touch targets for mobile */
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .btn {
+    padding: 10px 16px;
+  }
+  
+  .select {
+    padding: 8px 12px;
+  }
+  
+  /* Hide scrollbars on mobile for cleaner swiping */
+  ::-webkit-scrollbar { 
+    width: 4px; 
+    height: 4px; 
+    display: none; 
+  }
+}
