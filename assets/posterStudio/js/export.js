@@ -1,5 +1,5 @@
 // export.js — PNG/JPEG/WebP/SVG/PDF export via html2canvas + jsPDF (lazy loaded)
-import { toast } from '../assets/posterStudio/js/util.js';
+import { toast } from 'https://the27links.in/assets/posterStudio/js/util.js';
 
 let _libsLoaded = false;
 async function loadLib(src) {
