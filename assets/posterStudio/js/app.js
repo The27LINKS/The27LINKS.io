@@ -8,19 +8,19 @@ if (savedTheme) {
 // ✅ FIX 2: Moved this variable outside main() so syncCanvasSizeDropdown can access it!
 let previousSizeValue = 'square'; 
 
-import { loadAll } from '../assets/posterStudio/js/loader.js';
-import { State } from '../assets/posterStudio/js/state.js';
-import { Canvas } from '../assets/posterStudio/js/canvas.js';
-import { Selection } from '../assets/posterStudio/js/selection.js';
-import { History } from '../assets/posterStudio/js/history.js';
-import { Storage } from '../assets/posterStudio/js/storage.js';
-import { UI } from '../assets/posterStudio/js/ui.js';
-import { Properties } from '../assets/posterStudio/js/properties.js';
-import { Shortcuts } from '../assets/posterStudio/js/shortcuts.js';
-import { renderElement } from '../assets/posterStudio/js/elements.js';
-import { applyTemplate } from '../assets/posterStudio/js/templates.js';
-import { exportProject } from '../assets/posterStudio/js/export.js';
-import { toast } from '../assets/posterStudio/js/util.js';
+import { loadAll } from 'https://the27links.in/assets/posterStudio/js/loader.js';
+import { State } from 'https://the27links.in/assets/posterStudio/js/state.js';
+import { Canvas } from 'https://the27links.in/assets/posterStudio/js/canvas.js';
+import { Selection } from 'https://the27links.in/assets/posterStudio/js/selection.js';
+import { History } from 'https://the27links.in/assets/posterStudio/js/history.js';
+import { Storage } from 'https://the27links.in/assets/posterStudio/js/storage.js';
+import { UI } from 'https://the27links.in/assets/posterStudio/js/ui.js';
+import { Properties } from 'https://the27links.in/assets/posterStudio/js/properties.js';
+import { Shortcuts } from 'https://the27links.in/assets/posterStudio/js/shortcuts.js';
+import { renderElement } from 'https://the27links.in/assets/posterStudio/js/elements.js';
+import { applyTemplate } from 'https://the27links.in/assets/posterStudio/js/templates.js';
+import { exportProject } from 'https://the27links.in/assets/posterStudio/js/export.js';
+import { toast } from 'https://the27links.in/assets/posterStudio/js/util.js';
 
 async function main() {
   const data = await loadAll();
