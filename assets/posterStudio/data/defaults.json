@@ -1,0 +1,68 @@
+{
+  "canvasSizes": {
+    "a4-p":       { "width": 2480, "height": 3508, "label": "A4 Portrait" },
+    "a4-l":       { "width": 3508, "height": 2480, "label": "A4 Landscape" },
+    "a3":         { "width": 3508, "height": 4961, "label": "A3 Portrait" },
+    "a5":         { "width": 1748, "height": 2480, "label": "A5 Portrait" },
+    "letter":     { "width": 2550, "height": 3300, "label": "US Letter" },
+    "square":     { "width": 1080, "height": 1080, "label": "Square 1080" },
+    "ig-post":    { "width": 1080, "height": 1350, "label": "Instagram Post" },
+    "ig-story":   { "width": 1080, "height": 1920, "label": "Instagram Story" },
+    "fb-cover":   { "width": 1640, "height": 924,  "label": "Facebook Cover" },
+    "li-banner":  { "width": 1584, "height": 396,  "label": "LinkedIn Banner" },
+    "yt-thumb":   { "width": 1280, "height": 720,  "label": "YouTube Thumbnail" },
+    "x-post":     { "width": 1600, "height": 900,  "label": "X (Twitter) Post" },
+    "pin-std":    { "width": 1000, "height": 1500, "label": "Pinterest Pin" },
+    "tiktok":     { "width": 1080, "height": 1920, "label": "TikTok Video" },
+    "twitch-ban": { "width": 1920, "height": 480,  "label": "Twitch Banner" },
+    "etsy-ban":   { "width": 3360, "height": 840,  "label": "Etsy Shop Banner" }
+  },
+  "photos": [
+    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800",
+    "https://images.unsplash.com/photo-1557683316-973673baf926?w=800",
+    "https://images.unsplash.com/photo-1520975916090-3105956dac38?w=800",
+    "https://images.unsplash.com/photo-1533228876829-65c94e7b5025?w=800",
+    "https://images.unsplash.com/photo-1524292332709-b33366a7f165?w=800",
+    "https://images.unsplash.com/photo-1531685250784-7569952593d2?w=800",
+    "https://images.unsplash.com/photo-1494526585095-c41746248156?w=800",
+    "https://images.unsplash.com/photo-1516214104703-d870798883c5?w=800"
+  ],
+  "backgrounds": {
+    "solids": [
+      "transparent",
+      "#ffffff", 
+      "#000000",
+      "#faf7f2", 
+      "#f5efe1", 
+      "#ffe3c7", 
+      "#0e2f4a", 
+      "#101012", 
+      "#1a1a1f", 
+      "#ff6b4a", 
+      "#ffd166", 
+      "#7fd18b",
+      "#e1306c",
+      "#2b2d42", 
+      "#8d99ae", 
+      "#edf2f4", 
+      "#fcd5ce", 
+      "#e8e8e4", 
+      "#3a86ff", 
+      "#ff006e"
+    ],
+    "gradients": [
+      "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
+      "linear-gradient(135deg, #ff6b4a, #ffd166)",
+      "linear-gradient(180deg, #0e2f4a, #101012)",
+      "linear-gradient(135deg, #faf7f2, #ffe3c7)",
+      "linear-gradient(45deg, #7fd18b, #0e2f4a)",
+      "linear-gradient(135deg, #b688f0, #ff5a68)",
+      "radial-gradient(circle at 20% 20%, #ff6b4a, #101012 70%)",
+      "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+      "linear-gradient(120deg, #f6d365 0%, #fda085 100%)",
+      "linear-gradient(to right, #4facfe 0%, #00f2fe 100%)",
+      "linear-gradient(135deg, #2b2d42 0%, #101012 100%)",
+      "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+    ]
+  }
+}

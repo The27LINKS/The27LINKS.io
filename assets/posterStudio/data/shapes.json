@@ -1,0 +1,20 @@
+{
+  "shapes": [
+    { "id": "rectangle", "name": "Rectangle", "svg": "<rect x='4' y='16' width='88' height='64' rx='4' fill='currentColor'/>" },
+    { "id": "roundedRect", "name": "Rounded Rectangle", "svg": "<rect x='4' y='16' width='88' height='64' rx='16' fill='currentColor'/>" },
+    { "id": "circle", "name": "Circle", "svg": "<circle cx='48' cy='48' r='38' fill='currentColor'/>" },
+    { "id": "ellipse", "name": "Ellipse", "svg": "<ellipse cx='48' cy='48' rx='42' ry='28' fill='currentColor'/>" },
+    { "id": "triangle", "name": "Triangle", "svg": "<polygon points='48,10 88,82 8,82' fill='currentColor'/>" },
+    { "id": "diamond", "name": "Diamond", "svg": "<polygon points='48,8 88,48 48,88 8,48' fill='currentColor'/>" },
+    { "id": "hexagon", "name": "Hexagon", "svg": "<polygon points='24,14 72,14 92,48 72,82 24,82 4,48' fill='currentColor'/>" },
+    { "id": "pentagon", "name": "Pentagon", "svg": "<polygon points='48,8 88,38 72,82 24,82 8,38' fill='currentColor'/>" },
+    { "id": "octagon", "name": "Octagon", "svg": "<polygon points='30,8 66,8 88,30 88,66 66,88 30,88 8,66 8,30' fill='currentColor'/>" },
+    { "id": "star", "name": "Star", "svg": "<polygon points='48,6 58,38 92,38 64,58 74,90 48,70 22,90 32,58 4,38 38,38' fill='currentColor'/>" },
+    { "id": "heart", "name": "Heart", "svg": "<path d='M48 84 C 8 60, 8 20, 30 20 C 40 20, 46 28, 48 34 C 50 28, 56 20, 66 20 C 88 20, 88 60, 48 84 Z' fill='currentColor'/>" },
+    { "id": "arrow", "name": "Arrow", "svg": "<path d='M8 40 L60 40 L60 24 L92 48 L60 72 L60 56 L8 56 Z' fill='currentColor'/>" },
+    { "id": "bubble", "name": "Speech Bubble", "svg": "<path d='M12 12 H84 A8 8 0 0 1 92 20 V60 A8 8 0 0 1 84 68 H36 L20 84 L24 68 H12 A8 8 0 0 1 4 60 V20 A8 8 0 0 1 12 12 Z' fill='currentColor'/>" },
+    { "id": "line", "name": "Line", "svg": "<rect x='4' y='46' width='88' height='4' rx='2' fill='currentColor'/>" },
+    { "id": "cross", "name": "Cross", "svg": "<path d='M40 4 H56 V40 H92 V56 H56 V92 H40 V56 H4 V40 H40 Z' fill='currentColor'/>" },
+    { "id": "ribbon", "name": "Ribbon", "svg": "<path d='M8 30 H88 L76 48 L88 66 H8 L20 48 Z' fill='currentColor'/>" }
+  ]
+}

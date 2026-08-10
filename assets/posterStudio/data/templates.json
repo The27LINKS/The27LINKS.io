@@ -1,0 +1,94 @@
+{
+  "templates": [
+    {
+      "id": "corp-blue",
+      "name": "Corporate Poster",
+      "canvas": { "width": 1080, "height": 1350, "background": "#0e2f4a" },
+      "elements": [
+        { "type": "shape", "shape": "rectangle", "x": 0, "y": 0, "width": 1080, "height": 300, "fill": "#ff6b4a" },
+        { "type": "text", "content": "GROW YOUR\nBUSINESS", "x": 80, "y": 400, "width": 920, "height": 260, "fontSize": 110, "fontFamily": "Bricolage Grotesque", "fontWeight": 700, "color": "#ffffff", "lineHeight": 1.05, "textAlign": "left" },
+        { "type": "text", "content": "Strategic marketing solutions for modern brands", "x": 80, "y": 690, "width": 800, "height": 100, "fontSize": 34, "fontFamily": "Instrument Sans", "color": "#c7d9e8", "textAlign": "left" },
+        { "type": "shape", "shape": "rectangle", "x": 80, "y": 1180, "width": 340, "height": 80, "fill": "#ff6b4a", "radius": 40 },
+        { "type": "text", "content": "Get in touch →", "x": 80, "y": 1195, "width": 340, "height": 60, "fontSize": 26, "color": "#ffffff", "textAlign": "center", "fontWeight": 600 }
+      ]
+    },
+    {
+      "id": "sale-red",
+      "name": "Sale Poster",
+      "canvas": { "width": 1080, "height": 1080, "background": "#ffe3c7" },
+      "elements": [
+        { "type": "text", "content": "SUMMER\nSALE", "x": 80, "y": 120, "width": 900, "height": 500, "fontSize": 240, "fontFamily": "Bricolage Grotesque", "fontWeight": 700, "color": "#e04a2c", "lineHeight": 0.95, "textAlign": "left" },
+        { "type": "text", "content": "up to 50% off", "x": 80, "y": 640, "width": 900, "height": 100, "fontSize": 60, "fontFamily": "Instrument Sans", "color": "#3a1a10", "textAlign": "left" },
+        { "type": "shape", "shape": "circle", "x": 750, "y": 700, "width": 260, "height": 260, "fill": "#e04a2c" },
+        { "type": "text", "content": "SHOP\nNOW", "x": 750, "y": 770, "width": 260, "height": 120, "fontSize": 44, "fontFamily": "Bricolage Grotesque", "fontWeight": 700, "color": "#ffffff", "textAlign": "center", "lineHeight": 1 }
+      ]
+    },
+    {
+      "id": "ig-quote",
+      "name": "Instagram Quote",
+      "canvas": { "width": 1080, "height": 1080, "background": "#f5efe1" },
+      "elements": [
+        { "type": "text", "content": "\u201CDesign is\nintelligence made\nvisible.\u201D", "x": 100, "y": 260, "width": 880, "height": 500, "fontSize": 90, "fontFamily": "Bricolage Grotesque", "fontWeight": 500, "color": "#1c1c1e", "lineHeight": 1.1, "textAlign": "left" },
+        { "type": "text", "content": "— Alina Wheeler", "x": 100, "y": 850, "width": 500, "height": 60, "fontSize": 30, "fontFamily": "Instrument Sans", "color": "#8a7d5e", "textAlign": "left" }
+      ]
+    },
+    {
+      "id": "li-banner",
+      "name": "LinkedIn Banner",
+      "canvas": { "width": 1584, "height": 396, "background": "#101012" },
+      "elements": [
+        { "type": "shape", "shape": "circle", "x": 1250, "y": -100, "width": 500, "height": 500, "fill": "#ff6b4a", "opacity": 0.9 },
+        { "type": "text", "content": "Jane Doe", "x": 80, "y": 100, "width": 800, "height": 90, "fontSize": 70, "fontFamily": "Bricolage Grotesque", "fontWeight": 700, "color": "#ffffff", "textAlign": "left" },
+        { "type": "text", "content": "Product Designer · Building thoughtful software", "x": 80, "y": 200, "width": 900, "height": 60, "fontSize": 26, "fontFamily": "Instrument Sans", "color": "#a8a29b", "textAlign": "left" }
+      ]
+    },
+    {
+      "id": "yt-thumb",
+      "name": "YouTube Thumbnail",
+      "canvas": { "width": 1280, "height": 720, "background": "#1a1a1f" },
+      "elements": [
+        { "type": "shape", "shape": "rectangle", "x": 40, "y": 40, "width": 500, "height": 8, "fill": "#ffd166" },
+        { "type": "text", "content": "HOW TO\nDESIGN\nBETTER", "x": 60, "y": 80, "width": 700, "height": 500, "fontSize": 140, "fontFamily": "Bricolage Grotesque", "fontWeight": 700, "color": "#ffffff", "lineHeight": 0.95, "textAlign": "left" },
+        { "type": "text", "content": "10 pro tips inside", "x": 60, "y": 620, "width": 500, "height": 50, "fontSize": 32, "fontFamily": "Instrument Sans", "color": "#ffd166", "textAlign": "left" }
+      ]
+    },
+    {
+      "id": "cert",
+      "name": "Certificate",
+      "canvas": { "width": 1400, "height": 990, "background": "#faf7f2" },
+      "elements": [
+        { "type": "shape", "shape": "rectangle", "x": 40, "y": 40, "width": 1320, "height": 910, "fill": "transparent", "stroke": "#8a7d5e", "strokeWidth": 4 },
+        { "type": "shape", "shape": "rectangle", "x": 60, "y": 60, "width": 1280, "height": 870, "fill": "transparent", "stroke": "#8a7d5e", "strokeWidth": 1 },
+        { "type": "text", "content": "Certificate of Achievement", "x": 100, "y": 160, "width": 1200, "height": 90, "fontSize": 60, "fontFamily": "Bricolage Grotesque", "fontWeight": 500, "color": "#1c1c1e", "textAlign": "center" },
+        { "type": "text", "content": "This certificate is proudly presented to", "x": 100, "y": 320, "width": 1200, "height": 50, "fontSize": 24, "fontFamily": "Instrument Sans", "color": "#6c6a63", "textAlign": "center" },
+        { "type": "text", "content": "[ Recipient Name ]", "x": 100, "y": 400, "width": 1200, "height": 120, "fontSize": 90, "fontFamily": "Bricolage Grotesque", "fontWeight": 700, "color": "#e04a2c", "textAlign": "center" },
+        { "type": "text", "content": "For outstanding performance and commitment to excellence.", "x": 200, "y": 560, "width": 1000, "height": 80, "fontSize": 22, "fontFamily": "Instrument Sans", "color": "#4a4740", "textAlign": "center" },
+        { "type": "text", "content": "_______________________\nSignature", "x": 200, "y": 780, "width": 300, "height": 80, "fontSize": 18, "textAlign": "center", "color": "#4a4740" },
+        { "type": "text", "content": "_______________________\nDate", "x": 900, "y": 780, "width": 300, "height": 80, "fontSize": 18, "textAlign": "center", "color": "#4a4740" }
+      ]
+    },
+    {
+      "id": "bcard",
+      "name": "Business Card",
+      "canvas": { "width": 1050, "height": 600, "background": "#ffffff" },
+      "elements": [
+        { "type": "shape", "shape": "rectangle", "x": 0, "y": 0, "width": 350, "height": 600, "fill": "#0e2f4a" },
+        { "type": "text", "content": "J.D.", "x": 80, "y": 240, "width": 200, "height": 120, "fontSize": 110, "fontFamily": "Bricolage Grotesque", "fontWeight": 700, "color": "#ff6b4a", "textAlign": "left" },
+        { "type": "text", "content": "Jane Doe", "x": 430, "y": 200, "width": 550, "height": 80, "fontSize": 48, "fontFamily": "Bricolage Grotesque", "fontWeight": 600, "color": "#1c1c1e", "textAlign": "left" },
+        { "type": "text", "content": "Product Designer", "x": 430, "y": 270, "width": 550, "height": 50, "fontSize": 22, "color": "#6c6a63", "textAlign": "left" },
+        { "type": "text", "content": "hello@jane.design   ·   +1 555 010 0100", "x": 430, "y": 400, "width": 550, "height": 50, "fontSize": 18, "color": "#4a4740", "textAlign": "left", "fontFamily": "JetBrains Mono" }
+      ]
+    },
+    {
+      "id": "workshop",
+      "name": "Workshop Flyer",
+      "canvas": { "width": 1080, "height": 1350, "background": "#1a1a1f" },
+      "elements": [
+        { "type": "shape", "shape": "circle", "x": -200, "y": -200, "width": 700, "height": 700, "fill": "#ffd166", "opacity": 0.9 },
+        { "type": "text", "content": "DESIGN\nWORKSHOP", "x": 80, "y": 500, "width": 900, "height": 300, "fontSize": 110, "fontFamily": "Bricolage Grotesque", "fontWeight": 700, "color": "#ffffff", "lineHeight": 1, "textAlign": "left" },
+        { "type": "text", "content": "March 22 · 6:00 PM\nBrooklyn Studio, NYC", "x": 80, "y": 900, "width": 800, "height": 120, "fontSize": 32, "fontFamily": "Instrument Sans", "color": "#ffd166", "textAlign": "left" },
+        { "type": "text", "content": "Register at studio.example.com", "x": 80, "y": 1220, "width": 800, "height": 50, "fontSize": 20, "fontFamily": "JetBrains Mono", "color": "#a8a29b", "textAlign": "left" }
+      ]
+    }
+  ]
+}
