@@ -1,4 +1,6 @@
 window.TOOLS = [
+  { slug: 'crab', name: 'Crab', desc: 'Crab | Asset Validation Engine.', category: 'Dev', icon: 'crab', tags: ['crab', 'dev', 'asset','utility','engine'] },
+  { slug: 'PosterStudio', name: 'Poster Studio', desc: 'Create custom posters, social media graphics, and banners instantly with Poster Studio by The27LINKS. Free online design tools, custom templates, and high-res image exports.', category: 'Image', icon: 'convert', tags: ['image', 'poster', 'studio','editor','canva','photo'] },
   { slug: 'pdf-merge', name: 'PDF Merge', desc: 'Combine multiple PDF files into a single document, keeping the original quality.', category: 'PDF', icon: 'merge', tags: ['combine', 'join', 'pdf'] },
   { slug: 'pdf-split', name: 'PDF Split', desc: 'Extract specific pages or split a PDF into separate documents by page range.', category: 'PDF', icon: 'split', tags: ['extract', 'pages', 'pdf'] },
   { slug: 'pdf-compress', name: 'PDF Compress', desc: 'Reduce PDF file size by removing metadata and unused resources — in your browser.', category: 'PDF', icon: 'compress', tags: ['shrink', 'reduce', 'pdf'] },
@@ -7,12 +9,10 @@ window.TOOLS = [
   { slug: 'image-resize', name: 'Image Resize', desc: 'Resize images to exact dimensions or scale by percentage without losing quality.', category: 'Image', icon: 'resize', tags: ['dimensions', 'scale', 'crop'] },
   { slug: 'image-compress', name: 'Image Compress', desc: 'Shrink JPG, PNG, and WebP files with adjustable quality for faster web loads.', category: 'Image', icon: 'compress', tags: ['optimize', 'reduce', 'web'] },
   { slug: 'image-convert', name: 'Image Convert', desc: 'Convert between PNG, JPG, and WebP formats instantly — no upload required.', category: 'Image', icon: 'convert', tags: ['format', 'webp', 'jpg'] },
-  { slug: 'PosterStudio', name: 'Poster Studio', desc: 'Create custom posters, social media graphics, and banners instantly with Poster Studio by The27LINKS. Free online design tools, custom templates, and high-res image exports.', category: 'Image', icon: 'convert', tags: ['image', 'poster', 'studio','editor','canva','photo'] },
   { slug: 'word-counter', name: 'Word Counter', desc: 'Count words, characters, sentences and read time as you type or paste.', category: 'Text', icon: 'text', tags: ['writing', 'seo', 'count'] },
   { slug: 'case-converter', name: 'Case Converter', desc: 'Switch text between UPPERCASE, lowercase, Title Case, camelCase and more.', category: 'Text', icon: 'case', tags: ['text', 'format'] },
   { slug: 'qr-code-generator', name: 'QR Code Generator', desc: 'Generate downloadable QR codes for links, text, Wi-Fi, and contact cards.', category: 'Utility', icon: 'qr', tags: ['qr', 'barcode', 'share'] },
   { slug: 'meta-tag-generator', name: 'Meta Tag Generator', desc: 'Build SEO and Open Graph meta tags in seconds with a live preview.', category: 'SEO', icon: 'seo', tags: ['seo', 'og', 'twitter'] },
-  { slug: 'crab', name: 'Crab', desc: 'Crab | Asset Validation Engine.', category: 'Dev', icon: 'crab', tags: ['crab', 'dev', 'asset','utility','engine'] },
 ];
 
 window.TOOL_ICONS = {
