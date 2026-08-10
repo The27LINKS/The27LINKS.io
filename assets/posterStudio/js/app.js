@@ -8,19 +8,19 @@ if (savedTheme) {
 // ✅ FIX 2: Moved this variable outside main() so syncCanvasSizeDropdown can access it!
 let previousSizeValue = 'square'; 
 
-import { loadAll } from './loader.js';
-import { State } from './state.js';
-import { Canvas } from './canvas.js';
-import { Selection } from './selection.js';
-import { History } from './history.js';
-import { Storage } from './storage.js';
-import { UI } from './ui.js';
-import { Properties } from './properties.js';
-import { Shortcuts } from './shortcuts.js';
-import { renderElement } from './elements.js';
-import { applyTemplate } from './templates.js';
-import { exportProject } from './export.js';
-import { toast } from './util.js';
+import { loadAll } from './assets/posterStudio/js/loader.js';
+import { State } from './assets/posterStudio/js/state.js';
+import { Canvas } from './assets/posterStudio/js/canvas.js';
+import { Selection } from './assets/posterStudio/js/selection.js';
+import { History } from './assets/posterStudio/js/history.js';
+import { Storage } from './assets/posterStudio/js/storage.js';
+import { UI } from './assets/posterStudio/js/ui.js';
+import { Properties } from './assets/posterStudio/js/properties.js';
+import { Shortcuts } from './assets/posterStudio/js/shortcuts.js';
+import { renderElement } from './assets/posterStudio/js/elements.js';
+import { applyTemplate } from './assets/posterStudio/js/templates.js';
+import { exportProject } from './assets/posterStudio/js/export.js';
+import { toast } from './assets/posterStudio/js/util.js';
 
 async function main() {
   const data = await loadAll();
@@ -53,7 +53,7 @@ async function main() {
     // Run sync unconditionally on EVERY change
     syncCanvasSizeDropdown(state, data.defaults.canvasSizes);
 
-    // ✅ FIX 1: MOBILE PANEL LOGIC - Automatically show/hide properties sheet
+    // Automatically show/hide properties sheet
     const propertiesPanel = document.querySelector('.properties');
     if (propertiesPanel && window.innerWidth <= 768) {
       if (state.selectedIds.length > 0) {
@@ -209,7 +209,7 @@ async function main() {
   });
 
   // ==========================================
-  // ✅ FIX 3: MOBILE HAMBURGER MENU WIRING
+  //  MOBILE HAMBURGER MENU WIRING
   // ==========================================
   const mobileMenuBtn = document.getElementById('btn-mobile-menu');
   const desktopActions = document.getElementById('desktop-actions');
