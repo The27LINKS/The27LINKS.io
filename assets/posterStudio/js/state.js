@@ -1,5 +1,5 @@
 // state.js — central mutable state
-import { uid, deepClone } from './util.js';
+import { uid, deepClone } from './assets/posterStudio/js/util.js';
 
 export class State {
   constructor() {
