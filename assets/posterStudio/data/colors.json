@@ -1,0 +1,16 @@
+{
+  "swatches": [
+    ["#101012", "#1c1c1e", "#3a3a44", "#6c6a63", "#a8a29b", "#e2dccf", "#faf7f2", "#ffffff"],
+    ["#e04a2c", "#ff6b4a", "#ff8467", "#ffb199", "#ffd166", "#f6ac1f", "#c88a10", "#8a5b00"],
+    ["#0e2f4a", "#1a5b8a", "#2f8fc7", "#7fc4e8", "#7fd18b", "#3a9a4a", "#1f5f2b", "#0e2f10"],
+    ["#5a2ca0", "#7f4bd2", "#b688f0", "#e6d3ff", "#d4364b", "#ff5a68", "#ff9aa4", "#ffd6db"]
+  ],
+  "gradients": [
+    { "id": "sunset", "css": "linear-gradient(135deg, #ff6b4a, #ffd166)" },
+    { "id": "ocean", "css": "linear-gradient(135deg, #0e2f4a, #2f8fc7)" },
+    { "id": "forest", "css": "linear-gradient(135deg, #1f5f2b, #7fd18b)" },
+    { "id": "candy", "css": "linear-gradient(135deg, #ff5a68, #b688f0)" },
+    { "id": "cream", "css": "linear-gradient(135deg, #faf7f2, #ffd166)" },
+    { "id": "mono", "css": "linear-gradient(135deg, #101012, #6c6a63)" }
+  ]
+}
