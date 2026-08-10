@@ -1,6 +1,6 @@
 // ui.js — left rail: templates, text presets, shapes, photos, upload, backgrounds, layers
-import { applyTemplate } from './templates.js';
-import { uid, toast } from './util.js';
+import { applyTemplate } from './assets/posterStudio/js/templates.js';
+import { uid, toast } from './assets/posterStudio/js/util.js';
 
 export class UI {
   constructor(state, selection, history, data, canvas) {
