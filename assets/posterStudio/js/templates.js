@@ -1,5 +1,5 @@
 // templates.js — apply a template definition to state
-import { uid, deepClone } from '../assets/posterStudio/js/util.js';
+import { uid, deepClone } from 'https://the27links.in/assets/posterStudio/js/util.js';
 
 export function applyTemplate(state, template) {
   const t = deepClone(template);
