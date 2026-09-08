@@ -13,7 +13,14 @@
   --accent-ink: #ffffff;
   --accent-soft: #ffe8e5;
   
-  /* Added Missing Variables */
+  /* Error States */
+  --error-bg: #ffe9e9;
+  --error-border: #d63030;
+  --error-text: #6a0f0f;
+  --error-toast-bg: #b01c1c;
+  --error-toast-text: #ffffff;
+  
+  /* Missing Variables */
   --maxw: 1200px;
   --font-display: 'Fraunces', serif;
   --font-body: 'Geist', sans-serif;
@@ -36,6 +43,13 @@
   --accent: #ff6a5c;
   --accent-ink: #120404;
   --accent-soft: #3a1b17;
+
+  /* Error States */
+  --error-bg: #3a1515;
+  --error-border: #ff4d4d;
+  --error-text: #ffb3b3;
+  --error-toast-bg: #d63030;
+  --error-toast-text: #ffffff;
 }
 
 /* 3. Cyber Mode (Neon/High Contrast) */
@@ -52,12 +66,18 @@
   --accent-soft: #bc00ff22;
   --shadow-lg: 0 0 20px rgba(0, 255, 204, 0.2);
   --font-body: 'Geist Mono', monospace; /* Force mono for cyber feel */
+
+  /* Error States */
+  --error-bg: #1a0000;
+  --error-border: #ff0033;
+  --error-text: #ff3366;
+  --error-toast-bg: #ff0033;
+  --error-toast-text: #ffffff;
 }
 
 /* 4. Device/System Mode Logic */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    /* Copy variables from [data-theme="dark"] here to auto-switch */
     --bg: #0e0d0b;
     --bg-alt: #18161f;
     --surface: #16141a;
@@ -68,10 +88,16 @@
     --accent: #ff6a5c;
     --accent-ink: #120404;
     --accent-soft: #3a1b17;
+    
+    --error-bg: #3a1515;
+    --error-border: #ff4d4d;
+    --error-text: #ffb3b3;
+    --error-toast-bg: #d63030;
+    --error-toast-text: #ffffff;
   }
 }
 
-/* FIX: Removed hidden non-breaking spaces across global resets */
+/* ========== Global Resets ========== */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -293,7 +319,6 @@ img, svg { max-width: 100%; display: block; }
 .tool-card:hover .meta .arrow { transform: translateX(4px); color: var(--accent); }
 
 /* ========== Feature strip ========== */
-/* FIX: Adjusted variables so the colors correctly invert based on the theme (Dark in Light Mode, Light in Dark Mode) */
 .feat-strip {
   background: var(--ink); 
   color: var(--bg);
@@ -303,7 +328,9 @@ img, svg { max-width: 100%; display: block; }
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
   gap: 40px;
 }
-[data-theme="dark"] .feat-strip { 
+/* Applied consistently for both Dark and Cyber mode to prevent neon overload */
+[data-theme="dark"] .feat-strip,
+[data-theme="cyber"] .feat-strip { 
   background: var(--bg); 
   color: var(--ink); 
 }
@@ -312,7 +339,8 @@ img, svg { max-width: 100%; display: block; }
   font-weight: 400;
 }
 .feat-strip .item .n em { color: var(--accent); font-style: normal; }
-[data-theme="dark"] .feat-strip .item .n em { color: var(--accent); } /* Fix to maintain highlight contrast */
+[data-theme="dark"] .feat-strip .item .n em,
+[data-theme="cyber"] .feat-strip .item .n em { color: var(--accent); } 
 .feat-strip .item h4 { font-size: 17px; font-weight: 600; margin: 14px 0 6px; }
 .feat-strip .item p { font-size: 14px; opacity: .75; margin: 0; }
 
@@ -360,93 +388,55 @@ img, svg { max-width: 100%; display: block; }
 .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
 .footer-col a { font-size: 14px; color: var(--ink-soft); }
 
-/* 1. The Main Bottom Bar Layout (Using Grid for perfect centering) */
 .footer-bottom {
   margin-top: 25px; 
   padding-top: 24px; 
-  border-top: 2px solid var(--line, #e0dbcd);
+  border-top: 2px solid var(--line);
   display: grid; 
-  grid-template-columns: 1fr auto 1fr; /* 1fr sides, auto center */
+  grid-template-columns: 1fr auto 1fr;
   align-items: center; 
   gap: 16px; 
   font-size: 13px; 
-  color: var(--muted, #888);
+  color: var(--muted);
 }
 
 .footer-bottom a { 
-  color: var(--muted, #888); 
+  color: var(--muted); 
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
+/* Fixed hover state to respect themes */
 .footer-bottom a:hover {
-  color: #1a1a1a;
+  color: var(--ink);
 }
 
-/* 2. Positioning the 3 columns */
-.footer-copyright {
-  justify-self: start; /* Pushes to far left */
-}
+.footer-copyright { justify-self: start; }
+.footer-social { justify-self: center; display: flex; gap: 12px; align-items: center; padding: 0; margin: 0; }
+.footer-designer { justify-self: end; }
 
-.footer-social {
-  justify-self: center; /* Locks dead center */
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-designer {
-  justify-self: end; /* Pushes to far right */
-}
-
-/* 3. The Social Icons */
 .footer-bottom .social-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 36px; 
-  height: 36px;
-  background-color: transparent;
-  border: 1px solid var(--line, #e0dbcd);
-  border-radius: 50%;
+  display: flex; justify-content: center; align-items: center;
+  width: 36px; height: 36px; background-color: transparent;
+  border: 1px solid var(--line); border-radius: 50%;
   transition: all 0.3s ease;
 }
 
 .footer-bottom .social-icon img {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  opacity: 0.7; 
-  transition: opacity 0.3s ease;
+  width: 36px; height: 36px; object-fit: contain; opacity: 0.7; transition: opacity 0.3s ease;
 }
 
-/* 4. Social Hover Effects */
-.footer-bottom .social-icon:hover {
-  transform: translateY(-3px); 
-  background-color: rgba(0, 0, 0, 0.03); 
-}
+.footer-bottom .social-icon:hover { transform: translateY(-3px); background-color: var(--line); }
+.footer-bottom .social-icon:hover img { opacity: 1; }
 
-.footer-bottom .social-icon:hover img {
-  opacity: 1; 
-}
-
-/* 5. Mobile Responsiveness */
-/* FIX: Corrected indentation and closing brackets for better readability and strict syntax compliance */
 @media (max-width: 768px) {
   .footer-bottom {
-    grid-template-columns: 1fr; /* Stacks into a single column */
+    grid-template-columns: 1fr;
     text-align: center;
     gap: 20px;
     padding-bottom: 20px; 
   }
-
-  .footer-copyright, 
-  .footer-social, 
-  .footer-designer {
-    justify-self: center; /* Centers everything on mobile */
-  }
+  .footer-copyright, .footer-social, .footer-designer { justify-self: center; }
 }
 
 /* ========== Page headers ========== */
@@ -471,9 +461,7 @@ img, svg { max-width: 100%; display: block; }
 
 /* ========== Tool pages ========== */
 .tool-shell { padding: 48px 0 96px; }
-.tool-shell .layout {
-  display: grid; grid-template-columns: 1fr 320px; gap: 40px;
-}
+.tool-shell .layout { display: grid; grid-template-columns: 1fr 320px; gap: 40px; }
 @media (max-width: 980px) { .tool-shell .layout { grid-template-columns: 1fr; } }
 
 .tool-panel {
@@ -516,13 +504,18 @@ img, svg { max-width: 100%; display: block; }
 
 .actions-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
 
+/* Uses CSS variables to automatically adopt theme constraints */
 .result-box {
-  margin-top: 24px; padding: 24px; border-radius: 14px; background: var(--accent-soft); border: 1px solid var(--accent);
+  margin-top: 24px; padding: 24px; border-radius: 14px; 
+  background: var(--accent-soft); border: 1px solid var(--accent);
   display: none;
 }
 .result-box.show { display: block; }
-.result-box.error { background: #ffe9e9; border-color: #d63030; color: #6a0f0f; }
-[data-theme="dark"] .result-box.error { background: #3a1515; color: #ffb3b3; }
+.result-box.error { 
+  background: var(--error-bg); 
+  border-color: var(--error-border); 
+  color: var(--error-text); 
+}
 
 .tool-sidebar { display: flex; flex-direction: column; gap: 20px; }
 .sidebar-card {
@@ -560,7 +553,8 @@ img, svg { max-width: 100%; display: block; }
   background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 12px;
   box-shadow: var(--shadow-md); font-size: 14px; animation: fadeUp .3s ease;
 }
-.toast.error { background: #b01c1c; color: #fff; }
+/* Updated to use CSS variables */
+.toast.error { background: var(--error-toast-bg); color: var(--error-toast-text); }
 
 /* ========== Misc ========== */
 @media (max-width: 720px) { 
@@ -588,8 +582,8 @@ img, svg { max-width: 100%; display: block; }
 /* Styling for when the ad is actually populated */
 .ad-slot.active-ad {
   padding: 0; 
-  border: none; /* Removes the placeholder dashed line */
-  overflow: hidden; /* Forces the video to respect the border-radius */
+  border: none; 
+  overflow: hidden; 
   display: block; 
   background: transparent;
 }
@@ -598,13 +592,12 @@ img, svg { max-width: 100%; display: block; }
 .ad-slot.active-ad img {
   width: 100%;
   height: 100%;
-  max-height: 600px; /* Optional: enforces the 300x600 ratio */
-  object-fit: cover; /* Crops the video to fit perfectly without stretching */
+  max-height: 600px; 
+  object-fit: cover; 
   display: block;
   transition: opacity 0.2s ease;
 }
 
-/* Slight dim on hover to indicate it's a clickable link */
 .ad-slot.active-ad:hover video,
 .ad-slot.active-ad:hover img {
   opacity: 0.85;
