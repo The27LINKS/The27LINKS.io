@@ -291,7 +291,7 @@ img, svg { max-width: 100%; display: block; }
 
 /* ========== Feature strip ========== */
 .feat-strip {
-  background: var(--ink); color: var(--bg);
+  background: var(--bg); color: var(--ink);
   border-radius: var(--radius-lg); padding: 56px;
   display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px;
 }
