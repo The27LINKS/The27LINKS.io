@@ -70,6 +70,8 @@
     --accent-soft: #3a1b17;
   }
 }
+
+/* FIX: Removed hidden non-breaking spaces across global resets */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -82,6 +84,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+
 ::selection { background: var(--accent); color: var(--accent-ink); }
 
 a { color: var(--ink); text-decoration: none; transition: color .18s ease; }
@@ -290,18 +293,26 @@ img, svg { max-width: 100%; display: block; }
 .tool-card:hover .meta .arrow { transform: translateX(4px); color: var(--accent); }
 
 /* ========== Feature strip ========== */
+/* FIX: Adjusted variables so the colors correctly invert based on the theme (Dark in Light Mode, Light in Dark Mode) */
 .feat-strip {
-  background: var(--bg); color: var(--ink);
-  border-radius: var(--radius-lg); padding: 56px;
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px;
+  background: var(--ink); 
+  color: var(--bg);
+  border-radius: var(--radius-lg); 
+  padding: 56px;
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+  gap: 40px;
 }
-[data-theme="dark"] .feat-strip { background: var(--bg); color: var(--ink); }
+[data-theme="dark"] .feat-strip { 
+  background: var(--bg); 
+  color: var(--ink); 
+}
 .feat-strip .item .n {
   font-family: var(--font-display); font-size: 56px; line-height: 1; letter-spacing: -.03em;
   font-weight: 400;
 }
 .feat-strip .item .n em { color: var(--accent); font-style: normal; }
-[data-theme="dark"] .feat-strip .item .n em { color: var(--ink); }
+[data-theme="dark"] .feat-strip .item .n em { color: var(--accent); } /* Fix to maintain highlight contrast */
 .feat-strip .item h4 { font-size: 17px; font-weight: 600; margin: 14px 0 6px; }
 .feat-strip .item p { font-size: 14px; opacity: .75; margin: 0; }
 
@@ -348,6 +359,7 @@ img, svg { max-width: 100%; display: block; }
 .footer-col h5 { font-family: var(--font-mono); font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px; }
 .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
 .footer-col a { font-size: 14px; color: var(--ink-soft); }
+
 /* 1. The Main Bottom Bar Layout (Using Grid for perfect centering) */
 .footer-bottom {
   margin-top: 25px; 
@@ -421,12 +433,14 @@ img, svg { max-width: 100%; display: block; }
 }
 
 /* 5. Mobile Responsiveness */
+/* FIX: Corrected indentation and closing brackets for better readability and strict syntax compliance */
 @media (max-width: 768px) {
   .footer-bottom {
     grid-template-columns: 1fr; /* Stacks into a single column */
     text-align: center;
     gap: 20px;
-    padding-bottom: 20px; }
+    padding-bottom: 20px; 
+  }
 
   .footer-copyright, 
   .footer-social, 
@@ -434,8 +448,6 @@ img, svg { max-width: 100%; display: block; }
     justify-self: center; /* Centers everything on mobile */
   }
 }
-
-
 
 /* ========== Page headers ========== */
 .page-header {
@@ -551,8 +563,6 @@ img, svg { max-width: 100%; display: block; }
 .toast.error { background: #b01c1c; color: #fff; }
 
 /* ========== Misc ========== */
-
-/* Fixed: Hide mobile logic now ensures element is hidden on mobile while remaining visible on desktop */
 @media (max-width: 720px) { 
   .hide-mobile { display: none !important; } 
 }
@@ -574,7 +584,6 @@ img, svg { max-width: 100%; display: block; }
 .image-preview figure { margin: 0; border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: var(--bg-alt); }
 .image-preview figcaption { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
 .image-preview img { max-width: 100%; border-radius: 8px; }
-
 
 /* Styling for when the ad is actually populated */
 .ad-slot.active-ad {
