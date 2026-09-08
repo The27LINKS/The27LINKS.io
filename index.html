@@ -187,6 +187,68 @@
 <script src="/assets/js/tools-data.js"></script>
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/partials.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('home-search');
+    
+    // 1. The phrases you want to type out
+    const phrases = [
+      "merge pdf...",
+      "compress image...",
+      "qr code generator...",
+      "remove background...",
+      "format json..."
+    ];
 
+    // 2. Configuration & State
+    const prefix = "Try: ";       // The static text before the typing animation
+    let phraseIndex = 0;          // Which phrase we are currently on
+    let charIndex = 0;            // Which character of the phrase we are on
+    let isDeleting = false;       // Are we typing or backspacing?
+
+    function typeEffect() {
+      // Catch in case the element doesn't exist on the page
+      if (!searchInput) return;
+
+      const currentPhrase = phrases[phraseIndex];
+
+      if (isDeleting) {
+        // Remove a character
+        charIndex--;
+      } else {
+        // Add a character
+        charIndex++;
+      }
+
+      // Update the placeholder text
+      searchInput.setAttribute(
+        'placeholder', 
+        prefix + currentPhrase.substring(0, charIndex) + (isDeleting ? "" : "|") 
+      );
+      // Note: The "|" adds a fake blinking cursor effect while typing. 
+      // You can remove `+ (isDeleting ? "" : "|")` if you want it completely clean.
+
+      // 3. Timing Logic (in milliseconds)
+      let typeSpeed = isDeleting ? 40 : 100; // Deleting is faster than typing
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        // Word is fully typed out. Pause before deleting.
+        typeSpeed = 1500; 
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        // Word is fully deleted. Move to the next phrase.
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 400; // Pause before typing the next word
+      }
+
+      // Loop the animation
+      setTimeout(typeEffect, typeSpeed);
+    }
+
+    // Start the loop
+    typeEffect();
+  });
+</script>
 </body>
 </html>
