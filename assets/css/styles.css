@@ -320,8 +320,9 @@ img, svg { max-width: 100%; display: block; }
 
 /* ========== Feature strip ========== */
 .feat-strip {
-  background: var(--ink); 
-  color: var(--bg);
+  background: var(--surface); /* Adapts naturally to the current theme */
+  color: var(--ink); /* Standard text color */
+  border: 1px solid var(--line); /* Matches the styling of your other cards */
   border-radius: var(--radius-lg); 
   padding: 56px;
   display: grid; 
@@ -329,34 +330,31 @@ img, svg { max-width: 100%; display: block; }
   gap: 40px;
 }
 
-/* 1. Fix for explicit Dark & Cyber modes */
-[data-theme="dark"] .feat-strip,
-[data-theme="cyber"] .feat-strip { 
-  background: var(--surface); 
-  color: var(--ink); 
-}
-
-/* 2. Fix for System Default Dark Mode (prefers-color-scheme) */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .feat-strip {
-    background: var(--surface); 
-    color: var(--ink);
-  }
-  :root:not([data-theme]) .feat-strip .item .n em {
-    color: var(--accent);
-  }
-}
-
 .feat-strip .item .n {
-  font-family: var(--font-display); font-size: 56px; line-height: 1; letter-spacing: -.03em;
+  font-family: var(--font-display); 
+  font-size: 56px; 
+  line-height: 1; 
+  letter-spacing: -.03em;
   font-weight: 400;
 }
-.feat-strip .item .n em { color: var(--accent); font-style: normal; }
 
-[data-theme="dark"] .feat-strip .item .n em,
-[data-theme="cyber"] .feat-strip .item .n em { color: var(--accent); } 
-.feat-strip .item h4 { font-size: 17px; font-weight: 600; margin: 14px 0 6px; }
-.feat-strip .item p { font-size: 14px; opacity: .75; margin: 0; }
+.feat-strip .item .n em { 
+  color: var(--accent); 
+  font-style: normal; 
+}
+
+.feat-strip .item h4 { 
+  font-size: 17px; 
+  font-weight: 600; 
+  margin: 14px 0 6px; 
+}
+
+.feat-strip .item p { 
+  font-size: 14px; 
+  opacity: .75; 
+  margin: 0; 
+}
+
 /* ========== How it works ========== */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 @media (max-width: 820px) { .steps { grid-template-columns: 1fr; } }
