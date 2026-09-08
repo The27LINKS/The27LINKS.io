@@ -295,7 +295,7 @@ img, svg { max-width: 100%; display: block; }
   border-radius: var(--radius-lg); padding: 56px;
   display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px;
 }
-[data-theme="dark"] .feat-strip { background: var(--accent); color: var(--accent-ink); }
+[data-theme="dark"] .feat-strip { background: var(--bg); color: var(--ink); }
 .feat-strip .item .n {
   font-family: var(--font-display); font-size: 56px; line-height: 1; letter-spacing: -.03em;
   font-weight: 400;
