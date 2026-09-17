@@ -148,11 +148,11 @@
   <!-- Personal Profile with Image Tracking -->
   <url>
     <loc>https://the27links.in/SumitKumar</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://the27links.in/assets/img/SumitKumar.jpg</image:loc>
+      <image:loc>https://the27links.in/Sumit.webp</image:loc>
       <image:title>Sumit Kumar</image:title>
       <image:caption>Sumit Kumar, Founder and Lead Developer of The27LINKS</image:caption>
     </image:image>
