@@ -1,0 +1,23 @@
+{
+  "config": {
+    "format": "27LINKS-ENCRYPTED-CERTIFICATE",
+    "version": 1,
+    "algorithm": "AES-256-GCM",
+    "kdf": "PBKDF2-SHA-256",
+    "iterations": 250000
+  },
+  "records": [
+    {
+      "id": "User 1",
+      "salt": "B8sFeyjo13bFIK13d49g4Q==",
+      "iv": "5onDW34ns5C8ag72",
+      "ciphertext": "ce/FjnxkDWPTZoZq9qYY0mZAgfaUbUN9tRI44mnYdPr4QbnSwSX9WWCo8mG0YDMcT3mlw61Q9lsiQTXRxFofSADFsyS3BXDI3zgJVFQWsyxgWKfOSEe3oeaKADhbP+n0aKw06R5E23xEhXQfcvrYO8++4biCIEoZvUYXrP0fGtyMWRYk0V2PmogCgLKQ6X7G7x77sjRCDHtQ1YBmupQtcbUQTGGhyTTFImUmSEdF/6yi5yXGEG/tI/Vhmjwv4lz5NNE15CP+ku2JpWyv5NHmsbGjLsl1TpiyRajoFBAPLhk6EYyD1ATwcRFiXMOZCK6ArViUG4JHIWXY/6GeOZfE4u7Of+nHH87Lwh71LAQSK6oHsJ34MFHTcW5U37NN6E1NBkjASfyhUfj2hxIqi4KfFE6m5nFzsLCoa35JdT5KG4D13Q2cszHKCNpPjeMdB3sJJo1SIgOFW2v2z6wvG3oeOGEcYlMAIkl8DlTLvvSalITVmPFUkPggVrk4FFsylXl0n/81cL8Np+G/xFRVQvh30V07Ex7KzY+ShLv61XbjIY7SRxAYxG6gxGocA4erGQ=="
+    },
+    {
+      "id": "User 2",
+      "salt": "vwIvmjFKapePH46rX7YN/w==",
+      "iv": "3hUj6PJSU4qHxXn/",
+      "9TfwpNa8iYw9rZf1t6vN3F8jgTKevHKh7yJXKCIsRob2cOxCnNlBnZU6pOpamFIYhbnlIShKb1Blhks9Z8hde3jHdU8BpZLljGGolK/Etsy6qfax6EDkYSFoWbw+HCevTYfHCF7yNN3gWy3ZyP8mAPITUh+eVLTXGT4uwZZxbKjfVguOkd5Y3w5RxmLYkhE/ndzrb7SsCOmh0l4FfIJv+r4mEIh+GdCk6Ti645W/QzmACNOrY/9a2wNaUeFz120aUUTlOs2luckNDrBWxfFVu6/46emrX3OoJzpgGmkCPB8Q/y6/VBcy4zftACeIjECk9RKTGhMarOV+BnbhlwQpdfC1nZybYiPu09StpkyRLJQorV9PLoar+EO8M5ioC0oy/za2ZrsBC6bRuDnLmxXPWZUZ2c828tdWZG5pn2T+4i8MBMoYEVrpes2rubBaqTBGt6ytTNc5GM2KU1gd7KJRfmperskq8vbnc3SCPaJXxoAkgq10jpT7IQxtkDjvXD6osHB9bIMg2OT2/ywc021Q2fA1WuRTQ9wSThDqXFLBJ7vGVqG7qjQ="
+    }
+  ]
+}
