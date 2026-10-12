@@ -13,10 +13,10 @@
   <style>
     :root {
       --bg: #f8fafc;
-      --card-bg: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.9);
       --text-main: #0f172a;
       --text-muted: #64748b;
-      --border: #e2e8f0;
+      --border: rgba(226, 232, 240, 0.8);
       --accent: #0ea5e9;
       --success: #10b981;
       --error: #ef4444;
@@ -33,85 +33,141 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated Ambient Background */
+    body::before {
+      content: "";
+      position: absolute;
+      top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.05), transparent 60%),
+                  radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.03), transparent 50%);
+      animation: ambientShift 15s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    @keyframes ambientShift {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(2%, 2%) scale(1.05); }
     }
 
     header {
-      background: var(--card-bg);
-      padding: 24px 20px;
+      padding: 32px 20px;
       text-align: center;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
     }
     
-    header h1 { font-size: 24px; font-weight: 700; color: var(--text-main); }
-    header p { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
+    header h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+    header p { color: var(--text-muted); font-size: 15px; margin-top: 6px; }
 
     main {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 40px 20px;
+      padding: 60px 20px;
     }
 
     .card {
       background: var(--card-bg);
+      backdrop-filter: blur(16px);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 40px;
+      border-radius: 24px;
+      padding: 48px;
       width: 100%;
-      max-width: 600px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      max-width: 640px;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0,0,0,0.02);
       text-align: center;
       display: none;
-      animation: slideUp 0.4s ease-out;
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .card.active { display: block; }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .card.active { 
+      display: block; 
+      opacity: 1; 
+      transform: translateY(0) scale(1); 
     }
 
-    /* Loading State */
+    /* Modern Loader */
+    .spinner-container {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 28px;
+    }
     .spinner {
-      width: 48px;
-      height: 48px;
-      border: 4px solid var(--border);
+      width: 100%; height: 100%;
+      border: 3px solid rgba(14, 165, 233, 0.1);
       border-left-color: var(--accent);
       border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 24px;
+      animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    /* Icons */
-    .icon { font-size: 64px; line-height: 1; margin-bottom: 20px; }
-    .icon.success { color: var(--success); }
-    .icon.error { color: var(--error); }
+    /* Animated SVG Icons */
+    .icon-svg {
+      width: 72px; height: 72px;
+      margin: 0 auto 24px;
+      display: block;
+    }
+    .icon-svg circle {
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: drawCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+    .icon-svg path {
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      animation: drawPath 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.4s forwards;
+    }
+    .success-svg { stroke: var(--success); }
+    .error-svg { stroke: var(--error); }
+
+    @keyframes drawCircle { to { stroke-dashoffset: 0; } }
+    @keyframes drawPath { to { stroke-dashoffset: 0; } }
 
     /* Typography */
-    h2 { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
-    p.subtitle { color: var(--text-muted); margin-bottom: 32px; }
+    h2 { font-size: 26px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.01em; }
+    p.subtitle { color: var(--text-muted); margin-bottom: 36px; font-size: 16px; line-height: 1.6; }
 
-    /* Details Grid */
+    /* Staggered Details Grid */
     .details-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
       text-align: left;
-      background: var(--bg);
-      padding: 24px;
-      border-radius: 12px;
+      background: rgba(248, 250, 252, 0.7);
+      padding: 32px;
+      border-radius: 16px;
       border: 1px solid var(--border);
+    }
+
+    .detail-item {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeUpStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeUpStagger {
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .detail-item dt {
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       color: var(--text-muted);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       font-weight: 600;
     }
 
@@ -125,27 +181,34 @@
     /* Buttons */
     .btn {
       display: inline-block;
-      padding: 12px 28px;
+      padding: 14px 32px;
       background: var(--text-main);
       color: #fff;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 12px;
       font-weight: 500;
+      font-size: 15px;
       margin-top: 12px;
-      transition: background 0.2s;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
     }
-    .btn:hover { background: #334155; }
+    .btn:hover { 
+      background: #334155; 
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.2);
+    }
 
     footer {
       text-align: center;
-      padding: 24px;
+      padding: 32px;
       color: var(--text-muted);
-      font-size: 13px;
+      font-size: 14px;
     }
 
-    @media (max-width: 480px) {
-      .card { padding: 32px 20px; }
-      .details-grid { grid-template-columns: 1fr; }
+    @media (max-width: 600px) {
+      .card { padding: 36px 24px; border-radius: 20px; }
+      .details-grid { grid-template-columns: 1fr; padding: 24px; }
+      header { padding: 24px 16px; }
     }
   </style>
 </head>
@@ -159,22 +222,30 @@
   <main>
     <!-- STATE: LOADING -->
     <div id="state-loading" class="card active">
-      <div class="spinner"></div>
+      <div class="spinner-container">
+        <div class="spinner"></div>
+      </div>
       <h2>Verifying Record</h2>
-      <p class="subtitle">Securely checking the blockchain and database...</p>
+      <p class="subtitle">Securely authenticating the certificate database...</p>
     </div>
 
     <!-- STATE: SUCCESS -->
     <div id="state-success" class="card">
-      <div class="icon success">✓</div>
+      <svg class="icon-svg success-svg" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="20" />
+        <path d="M14 24l7 7 14-14" />
+      </svg>
       <h2>Authentic Certificate</h2>
-      <p class="subtitle" style="color: var(--success); font-weight: 500;">This record has been successfully verified.</p>
+      <p class="subtitle" style="color: var(--success); font-weight: 500;">This record has been officially verified.</p>
       <dl id="certificate-details" class="details-grid"></dl>
     </div>
 
     <!-- STATE: ERROR (OOPS) -->
     <div id="state-error" class="card">
-      <div class="icon error">✗</div>
+      <svg class="icon-svg error-svg" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="20" />
+        <path d="M16 16l16 16M32 16L16 32" />
+      </svg>
       <h2>Oops! Record Not Found</h2>
       <p class="subtitle" id="error-message">
         We could not find a valid certificate for the provided ID. The link may be broken, tampered with, or the certificate does not exist.
@@ -190,9 +261,7 @@
   <script>
     "use strict";
 
-    // =========================================================
-    // 1. SET YOUR JSON DATABASE URL HERE
-    // =========================================================
+    // GitHub hosted JSON URL
     const DATABASE_URL = "https://the27links.in/assets/Data/certificatesData.json";
 
     const encoder = new TextEncoder();
@@ -227,11 +296,13 @@
 
     function switchState(stateId) {
       document.querySelectorAll('.card').forEach(el => el.classList.remove('active'));
-      document.getElementById(stateId).classList.add('active');
+      // Slight delay to allow DOM render before triggering CSS animations
+      setTimeout(() => {
+        document.getElementById(stateId).classList.add('active');
+      }, 50);
     }
 
     function displayData(data) {
-      // Map the decrypted JSON to readable labels
       const fields = [
         ["Name", data.d1 ?? data.name],
         ["Certificate No.", data.d2 ?? data.certificateNo],
@@ -245,12 +316,15 @@
       const container = document.getElementById("certificate-details");
       container.innerHTML = "";
 
+      let delay = 0;
       fields.forEach(([label, value]) => {
         if (value) {
           const wrapper = document.createElement("div");
           wrapper.className = "detail-item";
+          wrapper.style.animationDelay = `${delay}s`;
           wrapper.innerHTML = `<dt>${label}</dt><dd>${value}</dd>`;
           container.appendChild(wrapper);
+          delay += 0.08; // Stagger effect
         }
       });
 
@@ -269,13 +343,13 @@
       }
 
       try {
+        // Cache-buster added here so GitHub Pages always serves the freshest JSON
         const response = await fetch(DATABASE_URL + "?t=" + new Date().getTime());
         if (!response.ok) throw new Error("Database offline");
         const db = await response.json();
         
         let matchedRecord = null;
         
-        // Test the URL key against every record in the array
         for (const record of db.records) {
           try {
             const data = await decryptCertificate(record, db.config, certificateKey);
@@ -286,7 +360,6 @@
               break; 
             }
           } catch (e) {
-            // Decryption fails naturally if the key doesn't match this specific record.
             continue;
           }
         }
@@ -294,7 +367,6 @@
         if (matchedRecord) {
           displayData(matchedRecord);
         } else {
-          // Loop finished without a match
           errorMsg.innerText = `We could not find a valid certificate matching ID "${certificateKey}". It may be invalid or tampered with.`;
           switchState('state-error');
         }
@@ -305,7 +377,6 @@
       }
     }
 
-    // Start verification automatically when page loads
     document.addEventListener("DOMContentLoaded", initializeVerification);
   </script>
 </body>
