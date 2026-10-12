@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Certificate Verification | The27LINKS</title>
+  <meta name="description" content="Verify The27LINKS certificates and experience letters securely." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #0ea5e9;
+      --success: #10b981;
+      --error: #ef4444;
+      --font-family: 'Geist', system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--card-bg);
+      padding: 24px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    header h1 { font-size: 24px; font-weight: 700; color: var(--text-main); }
+    header p { color: var(--text-muted); font-size: 14px; margin-top: 4px; }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      display: none;
+      animation: slideUp 0.4s ease-out;
+    }
+
+    .card.active { display: block; }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Loading State */
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--border);
+      border-left-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 24px;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* Icons */
+    .icon { font-size: 64px; line-height: 1; margin-bottom: 20px; }
+    .icon.success { color: var(--success); }
+    .icon.error { color: var(--error); }
+
+    /* Typography */
+    h2 { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+    p.subtitle { color: var(--text-muted); margin-bottom: 32px; }
+
+    /* Details Grid */
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      text-align: left;
+      background: var(--bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .detail-item dt {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .detail-item dd {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-main);
+      word-break: break-word;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--text-main);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      margin-top: 12px;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #334155; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 32px 20px; }
+      .details-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>The27LINKS</h1>
+    <p>Official Verification Portal</p>
+  </header>
+
+  <main>
+    <!-- STATE: LOADING -->
+    <div id="state-loading" class="card active">
+      <div class="spinner"></div>
+      <h2>Verifying Record</h2>
+      <p class="subtitle">Securely checking the blockchain and database...</p>
+    </div>
+
+    <!-- STATE: SUCCESS -->
+    <div id="state-success" class="card">
+      <div class="icon success">✓</div>
+      <h2>Authentic Certificate</h2>
+      <p class="subtitle" style="color: var(--success); font-weight: 500;">This record has been successfully verified.</p>
+      <dl id="certificate-details" class="details-grid"></dl>
+    </div>
+
+    <!-- STATE: ERROR (OOPS) -->
+    <div id="state-error" class="card">
+      <div class="icon error">✗</div>
+      <h2>Oops! Record Not Found</h2>
+      <p class="subtitle" id="error-message">
+        We could not find a valid certificate for the provided ID. The link may be broken, tampered with, or the certificate does not exist.
+      </p>
+      <a href="mailto:support@the27links.in" class="btn">Contact Support</a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 The27LINKS. All rights reserved.
+  </footer>
+
+  <script>
+    "use strict";
+
+    // =========================================================
+    // 1. SET YOUR JSON DATABASE URL HERE
+    // =========================================================
+    const DATABASE_URL = "https://the27links.in/assets/Data/certificatesData.json";
+
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
+
+    function fromBase64(value) {
+      const binary = atob(value);
+      return Uint8Array.from(binary, char => char.charCodeAt(0));
+    }
+
+    async function deriveKey(passphrase, salt, iterations) {
+      const material = await crypto.subtle.importKey(
+        "raw", encoder.encode(passphrase), "PBKDF2", false, ["deriveKey"]
+      );
+      return crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt, iterations: iterations, hash: "SHA-256" },
+        material, { name: "AES-GCM", length: 256 }, false, ["decrypt"]
+      );
+    }
+
+    async function decryptCertificate(record, config, passphrase) {
+      const salt = fromBase64(record.salt);
+      const iv = fromBase64(record.iv);
+      const ciphertext = fromBase64(record.ciphertext);
+      const key = await deriveKey(passphrase, salt, config.iterations);
+      
+      const plaintext = await crypto.subtle.decrypt(
+        { name: "AES-GCM", iv }, key, ciphertext
+      );
+      return JSON.parse(decoder.decode(plaintext));
+    }
+
+    function switchState(stateId) {
+      document.querySelectorAll('.card').forEach(el => el.classList.remove('active'));
+      document.getElementById(stateId).classList.add('active');
+    }
+
+    function displayData(data) {
+      // Map the decrypted JSON to readable labels
+      const fields = [
+        ["Name", data.d1 ?? data.name],
+        ["Certificate No.", data.d2 ?? data.certificateNo],
+        ["Type", data.d3 ?? data.recordType],
+        ["Role", data.d4 ?? data.role],
+        ["Duration/Days", data.d6 ?? data.daysWorked],
+        ["Issue Date", data.d8 ?? data.certificateIssueDate],
+        ["Authorized By", data.d11 ?? data.approvedBy]
+      ];
+
+      const container = document.getElementById("certificate-details");
+      container.innerHTML = "";
+
+      fields.forEach(([label, value]) => {
+        if (value) {
+          const wrapper = document.createElement("div");
+          wrapper.className = "detail-item";
+          wrapper.innerHTML = `<dt>${label}</dt><dd>${value}</dd>`;
+          container.appendChild(wrapper);
+        }
+      });
+
+      switchState('state-success');
+    }
+
+    async function initializeVerification() {
+      const params = new URLSearchParams(window.location.search);
+      const certificateKey = params.get("certificateNo");
+      const errorMsg = document.getElementById("error-message");
+
+      if (!certificateKey) {
+        errorMsg.innerText = "No certificate number was found in the URL. Please ensure you are using the complete verification link.";
+        switchState('state-error');
+        return;
+      }
+
+      try {
+        const response = await fetch(DATABASE_URL);
+        if (!response.ok) throw new Error("Database offline");
+        const db = await response.json();
+        
+        let matchedRecord = null;
+        
+        // Test the URL key against every record in the array
+        for (const record of db.records) {
+          try {
+            const data = await decryptCertificate(record, db.config, certificateKey);
+            const storedNumber = String(data.d2 ?? data.certificateNo ?? "");
+            
+            if (storedNumber === certificateKey) {
+              matchedRecord = data;
+              break; 
+            }
+          } catch (e) {
+            // Decryption fails naturally if the key doesn't match this specific record.
+            continue;
+          }
+        }
+
+        if (matchedRecord) {
+          displayData(matchedRecord);
+        } else {
+          // Loop finished without a match
+          errorMsg.innerText = `We could not find a valid certificate matching ID "${certificateKey}". It may be invalid or tampered with.`;
+          switchState('state-error');
+        }
+
+      } catch (error) {
+        errorMsg.innerText = "We are currently experiencing a system error connecting to the verification database. Please try again later.";
+        switchState('state-error');
+      }
+    }
+
+    // Start verification automatically when page loads
+    document.addEventListener("DOMContentLoaded", initializeVerification);
+  </script>
+</body>
+</html>
