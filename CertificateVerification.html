@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Certificate Verification | The27LINKS</title>
   <meta name="description" content="Verify The27LINKS certificates and experience letters securely." />
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
   
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -363,7 +367,7 @@
       }
 
       try {
-        const response = await fetch(DATABASE_URL + "?t=" + new Date().getTime());
+        const response = await fetch(DATABASE_URL, { cache: 'no-store' });
         if (!response.ok) throw new Error("Database offline");
         const db = await response.json();
         
