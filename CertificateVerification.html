@@ -269,7 +269,7 @@
       }
 
       try {
-        const response = await fetch(DATABASE_URL);
+        const response = await fetch(DATABASE_URL + "?t=" + new Date().getTime());
         if (!response.ok) throw new Error("Database offline");
         const db = await response.json();
         
