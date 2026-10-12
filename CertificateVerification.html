@@ -6,18 +6,20 @@
   <title>Certificate Verification | The27LINKS</title>
   <meta name="description" content="Verify The27LINKS certificates and experience letters securely." />
 
+  <!-- Security & Caching Headers -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <!-- CSP: Restricts scripts to self, allows fonts from Google, limits data connections to your domain -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://the27links.in; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:;">
   
   <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Restored your original fonts -->
+  
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
   
-  <!-- Your global stylesheet -->
   <link rel="stylesheet" href="assets/css/styles.css" />
 
   <style>
@@ -46,7 +48,6 @@
       background-color: var(--verify-bg);
     }
 
-    /* Subtle Animated Background Mesh */
     .verification-section::before {
       content: "";
       position: absolute;
@@ -62,7 +63,6 @@
       100% { transform: translate(2%, 2%) scale(1.05); }
     }
 
-    /* Verification Card */
     .verify-card {
       position: relative;
       z-index: 1;
@@ -87,7 +87,6 @@
       transform: translateY(0) scale(1); 
     }
 
-    /* Typography inside Card */
     .verify-card h2 {
       font-family: 'Geist', sans-serif;
       font-size: 26px;
@@ -106,7 +105,6 @@
       margin-right: auto;
     }
 
-    /* Spinner */
     .spinner-container { position: relative; width: 56px; height: 56px; margin: 0 auto 28px; }
     .spinner {
       width: 100%; height: 100%;
@@ -117,7 +115,6 @@
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    /* Animated SVG Icons */
     .icon-svg { width: 72px; height: 72px; margin: 0 auto 24px; display: block; }
     .icon-svg circle {
       stroke-width: 2.5; fill: none; stroke-dasharray: 100; stroke-dashoffset: 100;
@@ -134,7 +131,6 @@
     @keyframes drawCircle { to { stroke-dashoffset: 0; } }
     @keyframes drawPath { to { stroke-dashoffset: 0; } }
 
-    /* Details Grid */
     .details-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -169,7 +165,6 @@
       line-height: 1.4;
     }
 
-    /* Support Button */
     .btn-action {
       display: inline-flex;
       align-items: center;
@@ -191,32 +186,16 @@
       box-shadow: 0 8px 16px rgba(15, 23, 42, 0.2);
     }
 
-    /* -------------------------------------------
-       BEAUTIFIED MOBILE RESPONSIVENESS
-    ------------------------------------------- */
     @media (max-width: 600px) {
       .verification-section { padding: 40px 16px; }
-      
-      .verify-card { 
-        padding: 40px 24px; 
-        border-radius: 20px; 
-      }
-      
+      .verify-card { padding: 40px 24px; border-radius: 20px; }
       .verify-card h2 { font-size: 22px; margin-bottom: 8px; }
       .verify-card p.subtitle { font-size: 14px; margin-bottom: 28px; width: 100%; }
-      
       .icon-svg { width: 60px; height: 60px; margin-bottom: 20px; }
       .spinner-container { width: 48px; height: 48px; margin-bottom: 24px; }
-      
-      .details-grid { 
-        grid-template-columns: 1fr; /* Single column on mobile */
-        gap: 20px; 
-        padding: 24px 20px; 
-      }
-      
+      .details-grid { grid-template-columns: 1fr; gap: 20px; padding: 24px 20px; }
       .detail-item dt { font-size: 10px; }
       .detail-item dd { font-size: 14px; }
-      
       .btn-action { width: 100%; padding: 14px 20px; }
     }
   </style>
@@ -224,12 +203,10 @@
 
 <body data-testid="verification-page">
 
-  <!-- YOUR GLOBAL HEADER -->
   <header>
     <div id="header"></div>
   </header>
 
-  <!-- YOUR GLOBAL PAGE TITLE HEADER (Matches Contact Page) -->
   <section class="page-header">
     <div class="container">
       <h1>Verification Portal.</h1>
@@ -237,7 +214,6 @@
     </div>
   </section>
 
-  <!-- MAIN VERIFICATION APP -->
   <section class="verification-section">
     
     <!-- STATE: LOADING -->
@@ -266,7 +242,7 @@
         <circle cx="24" cy="24" r="20" />
         <path d="M16 16l16 16M32 16L16 32" />
       </svg>
-      <h2>Record Not Found</h2>
+      <h2 id="error-title">Record Not Found</h2>
       <p class="subtitle" id="error-message">
         We could not find a valid certificate for the provided ID. The link may be broken, tampered with, or does not exist.
       </p>
@@ -275,16 +251,13 @@
 
   </section>
 
-  <!-- YOUR GLOBAL FOOTER -->
   <footer>
      <div id="footer"></div>
   </footer>
   
-  <!-- YOUR GLOBAL SCRIPTS -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/partials.js"></script>
 
-  <!-- VERIFICATION LOGIC -->
   <script>
     "use strict";
 
@@ -293,8 +266,12 @@
     const decoder = new TextDecoder();
 
     function fromBase64(value) {
-      const binary = atob(value);
-      return Uint8Array.from(binary, char => char.charCodeAt(0));
+      try {
+        const binary = atob(value);
+        return Uint8Array.from(binary, char => char.charCodeAt(0));
+      } catch (e) {
+        throw new Error("INVALID_BASE64");
+      }
     }
 
     async function deriveKey(passphrase, salt, iterations) {
@@ -326,6 +303,12 @@
       }, 50);
     }
 
+    function showError(title, message) {
+      document.getElementById("error-title").textContent = title;
+      document.getElementById("error-message").textContent = message;
+      switchState('state-error');
+    }
+
     function displayData(data) {
       const fields = [
         ["Full Name", data.d1 ?? data.name],
@@ -338,7 +321,7 @@
       ];
 
       const container = document.getElementById("certificate-details");
-      container.innerHTML = "";
+      container.innerHTML = ""; // Clear existing
 
       let delay = 0;
       fields.forEach(([label, value]) => {
@@ -346,7 +329,15 @@
           const wrapper = document.createElement("div");
           wrapper.className = "detail-item";
           wrapper.style.animationDelay = `${delay}s`;
-          wrapper.innerHTML = `<dt>${label}</dt><dd>${value}</dd>`;
+          
+          // Secure injection preventing XSS
+          const dt = document.createElement("dt");
+          dt.textContent = label;
+          const dd = document.createElement("dd");
+          dd.textContent = value;
+          
+          wrapper.appendChild(dt);
+          wrapper.appendChild(dd);
           container.appendChild(wrapper);
           delay += 0.08; 
         }
@@ -358,21 +349,41 @@
     async function initializeVerification() {
       const params = new URLSearchParams(window.location.search);
       const certificateKey = params.get("certificateNo");
-      const errorMsg = document.getElementById("error-message");
 
-      if (!certificateKey) {
-        errorMsg.innerText = "No certificate number was found in the URL. Please ensure you are clicking the complete verification link provided to you.";
-        switchState('state-error');
-        return;
+      // Input Validation
+      if (!certificateKey || certificateKey.trim() === "") {
+        return showError("Invalid Request", "No certificate number was found in the URL. Please ensure you are clicking the complete verification link.");
+      }
+      if (certificateKey.length > 100) {
+        return showError("Invalid Request", "The provided certificate key exceeds the maximum allowed length.");
       }
 
+      // Setup AbortController for Fetch Timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
       try {
-        const response = await fetch(DATABASE_URL, { cache: 'no-store' });
-        if (!response.ok) throw new Error("Database offline");
+        const response = await fetch(DATABASE_URL, { 
+          cache: 'no-store', 
+          signal: controller.signal 
+        });
+        
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          throw new Error("NETWORK_ERROR");
+        }
+        
         const db = await response.json();
+        
+        // Database Schema Validation
+        if (!db || !db.config || !Array.isArray(db.records)) {
+          throw new Error("SCHEMA_ERROR");
+        }
         
         let matchedRecord = null;
         
+        // Decryption Loop
         for (const record of db.records) {
           try {
             const data = await decryptCertificate(record, db.config, certificateKey);
@@ -383,6 +394,7 @@
               break; 
             }
           } catch (e) {
+            // Fails silently for incorrect records, continues to next
             continue;
           }
         }
@@ -390,13 +402,19 @@
         if (matchedRecord) {
           displayData(matchedRecord);
         } else {
-          errorMsg.innerText = `We could not find a valid record matching ID "${certificateKey}". It may be invalid, tampered with, or does not exist in our system.`;
-          switchState('state-error');
+          showError("Record Not Found", `We could not find a valid record matching ID "${certificateKey}". It may be invalid, tampered with, or does not exist in our system.`);
         }
 
       } catch (error) {
-        errorMsg.innerText = "We are currently experiencing a system error connecting to the verification database. Please try again later.";
-        switchState('state-error');
+        clearTimeout(timeoutId);
+        
+        if (error.name === 'AbortError') {
+          showError("Connection Timeout", "The secure connection to the database timed out. Please check your internet connection and try again.");
+        } else if (error.message === "SCHEMA_ERROR") {
+          showError("System Error", "The verification database format is invalid. Please contact support.");
+        } else {
+          showError("Network Error", "We are currently experiencing a system error connecting to the verification database. Please try again later.");
+        }
       }
     }
 
