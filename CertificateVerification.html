@@ -7,7 +7,7 @@
   <meta name="description" content="Verify The27LINKS certificates securely." />
 
   <!-- Security Headers -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://the27links.in; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -127,7 +127,7 @@
     <div id="state-loading" class="verify-card active">
       <div class="spinner"></div>
       <h2>Authenticating Record...</h2>
-      <p class="subtitle">Securely decrypting the embedded records.</p>
+      <p class="subtitle">Securely fetching and decrypting external records.</p>
     </div>
 
     <!-- STATE: SUCCESS -->
@@ -156,28 +156,7 @@
   <script>
     "use strict";
 
-    // =========================================================
-    // EMBEDDED DATABASE: Paste output from Admin Generator here
-    // =========================================================
-    const LOCAL_DATABASE = {
-      "config": {
-        "format": "27LINKS-ENCRYPTED-CERTIFICATE",
-        "version": 1,
-        "algorithm": "AES-256-GCM",
-        "kdf": "PBKDF2-SHA-256",
-        "iterations": 250000
-      },
-      "records": [
-        {
-          "id": "e81d11b3-4f96-4148-af7e-399049449f80",
-          "salt": "L1/OONZz1Z5oYkY2bKkQyA==",
-          "iv": "X8T4z32+F8U1i85x",
-          "ciphertext": "i3Y8+L/xJq3PzZ3l1Q5r0gY2z4aT2yH5n6x7k8p9o0q1r2s3t4u5v6w7x8y9z0A1B2C3D4E5F6G7H8I9J0K1L2M3N4O5P6Q7R8S9T0U1V2W3X4Y5Z6a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q3r4s5t6u7v8w9x0y1z2"
-        }
-      ]
-    };
-    // =========================================================
-
+    const DATABASE_URL = "https://the27links.in/assets/Data/certificatesData.json";
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
 
@@ -228,14 +207,22 @@
     }
 
     function displayData(data) {
+      // Mapping all updated custom parameters
       const fields = [
-        ["Full Name", data.d1], ["Certificate No.", data.d2],
-        ["Record Type", data.d3], ["Role", data.d4],
-        ["Duration", data.d6], ["Issue Date", data.d8],
-        ["Authorized By", data.d11]
+        ["Full Name", data.d1], 
+        ["Certificate No.", data.d2],
+        ["Role / Designation", data.d3], 
+        ["Time Period", data.d4],
+        ["Age Group", data.d5], 
+        ["Department", data.d6],
+        ["Overall Performance", data.d7], 
+        ["Issue Date", data.d8],
+        ["Authorized By", data.d9]
       ];
 
       const container = document.getElementById("certificate-details");
+      container.innerHTML = "";
+
       fields.forEach(([label, value]) => {
         if (value) {
           const dt = document.createElement("dt"); dt.textContent = label;
@@ -257,23 +244,43 @@
       }
       
       certificateKey = certificateKey.trim();
-      const db = LOCAL_DATABASE;
-      let matchedRecord = null;
 
-      for (const record of db.records) {
-        try {
-          const data = await decryptCertificate(record, db.config, certificateKey);
-          if (String(data.d2) === certificateKey) {
-            matchedRecord = data;
-            break; 
+      try {
+        const response = await fetch(DATABASE_URL + "?t=" + Date.now(), { cache: 'no-store' });
+        if (!response.ok) throw new Error("FILE_NOT_FOUND");
+        
+        const db = await response.json();
+        if (!db || !db.config || !Array.isArray(db.records)) {
+          throw new Error("SCHEMA_ERROR");
+        }
+
+        let matchedRecord = null;
+
+        for (const record of db.records) {
+          try {
+            const data = await decryptCertificate(record, db.config, certificateKey);
+            if (String(data.d2) === certificateKey) {
+              matchedRecord = data;
+              break; 
+            }
+          } catch (e) {
+            continue; 
           }
-        } catch (e) {
-          continue; 
+        }
+
+        if (matchedRecord) {
+          displayData(matchedRecord);
+        } else {
+          showError("Record Not Found", `No valid record matching ID "${certificateKey}".`);
+        }
+
+      } catch (error) {
+        if (error.message === "FILE_NOT_FOUND") {
+          showError("Database Missing", "The external certificatesData.json file could not be reached.");
+        } else {
+          showError("System Error", "An error occurred while connecting to the verification database.");
         }
       }
-
-      if (matchedRecord) displayData(matchedRecord);
-      else showError("Record Not Found", `No valid record matching ID "${certificateKey}".`);
     }
 
     document.addEventListener("DOMContentLoaded", initializeVerification);
