@@ -6,7 +6,10 @@
   <title>Certificate Verification | The27LINKS</title>
   <meta name="description" content="Verify The27LINKS certificates securely." />
 
-  <!-- Security Headers -->
+  <!-- Strict Security & Anti-Cache Headers -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self' https://the27links.in; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
   
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,144 +17,190 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
   
   <style>
+    /* ISOLATED COMPONENT SCOPE */
     :root {
-      --verify-bg: #f8fafc;
-      --verify-card: rgba(255, 255, 255, 0.95);
-      --verify-text: #0f172a;
-      --verify-muted: #64748b;
-      --verify-border: rgba(226, 232, 240, 0.8);
-      --verify-accent: #0f172a;
-      --verify-success: #10b981;
-      --verify-error: #ef4444;
+      --iv-bg: #f8fafc;
+      --iv-card: #ffffff;
+      --iv-text: #0f172a;
+      --iv-muted: #64748b;
+      --iv-border: #e2e8f0;
+      --iv-success: #10b981;
+      --iv-error: #ef4444;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
-    body {
+    html, body {
+      width: 100%;
+      height: 100%;
       font-family: 'Geist', sans-serif;
-      background-color: var(--verify-bg);
-      color: var(--verify-text);
+      background-color: var(--iv-bg);
+      color: var(--iv-text);
       display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
       position: relative;
+      overflow-x: hidden;
     }
 
+    /* Ambient Isolated Backdrop */
     body::before {
       content: "";
-      position: absolute;
+      position: fixed;
       top: -50%; left: -50%; width: 200%; height: 200%;
-      background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.04), transparent 60%),
+      background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.03), transparent 60%),
                   radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.02), transparent 50%);
-      animation: ambientShift 20s ease-in-out infinite alternate;
-      z-index: -1;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    @keyframes ambientShift {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(2%, 2%) scale(1.05); }
+    /* ISOLATED CONTAINER WIDGET */
+    .iv-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 680px;
+      padding: 20px;
     }
 
-    header {
-      padding: 32px; text-align: center; background: rgba(255,255,255,0.7);
-      backdrop-filter: blur(10px); border-bottom: 1px solid var(--verify-border);
+    .iv-card {
+      background: var(--iv-card);
+      border: 1px solid var(--iv-border);
+      border-radius: 24px;
+      padding: 48px 40px;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.06);
+      text-align: center;
+      display: none;
+      opacity: 0;
+      transform: translateY(16px) scale(0.99);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .iv-card.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .iv-card h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .iv-card p.iv-subtitle {
+      color: var(--iv-muted);
+      margin-bottom: 32px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* Spinner */
+    .iv-spinner {
+      width: 48px; height: 48px; margin: 0 auto 24px;
+      border: 3px solid rgba(15, 23, 42, 0.08);
+      border-left-color: var(--iv-text);
+      border-radius: 50%;
+      animation: ivSpin 0.8s linear infinite;
+    }
+    @keyframes ivSpin { 100% { transform: rotate(360deg); } }
+
+    /* SVG Icons */
+    .iv-svg { width: 64px; height: 64px; margin: 0 auto 20px; display: block; }
+    .iv-svg circle { stroke-width: 2.5; fill: none; stroke-dasharray: 100; stroke-dashoffset: 100; animation: ivDrawCircle 0.5s ease forwards; }
+    .iv-svg path { stroke-width: 2.5; fill: none; stroke-dasharray: 50; stroke-dashoffset: 50; animation: ivDrawPath 0.3s ease 0.3s forwards; }
+    .iv-success-stroke { stroke: var(--iv-success); }
+    .iv-error-stroke { stroke: var(--iv-error); }
+
+    @keyframes ivDrawCircle { to { stroke-dashoffset: 0; } }
+    @keyframes ivDrawPath { to { stroke-dashoffset: 0; } }
+
+    /* Data Display Grid */
+    .iv-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      text-align: left;
+      background: #f8fafc;
+      padding: 28px;
+      border-radius: 16px;
+      border: 1px solid var(--iv-border);
     }
     
-    main {
-      flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px;
+    .iv-item dt {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--iv-muted);
+      margin-bottom: 4px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
     }
 
-    .verify-card {
-      background: var(--verify-card); backdrop-filter: blur(20px);
-      border: 1px solid var(--verify-border); border-radius: 24px;
-      padding: 48px 40px; width: 100%; max-width: 680px;
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08); text-align: center;
-      display: none; opacity: 0; transform: translateY(20px) scale(0.98);
-      transition: all 0.5s ease;
+    .iv-item dd {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--iv-text);
+      word-break: break-word;
     }
 
-    .verify-card.active { display: block; opacity: 1; transform: translateY(0) scale(1); }
-
-    .verify-card h2 { font-size: 26px; font-weight: 600; margin-bottom: 12px; }
-    .verify-card p.subtitle { color: var(--verify-muted); margin-bottom: 36px; font-size: 15px; }
-
-    /* Animated Icons */
-    .spinner {
-      width: 56px; height: 56px; margin: 0 auto 28px;
-      border: 3px solid rgba(15, 23, 42, 0.1); border-left-color: var(--verify-accent);
-      border-radius: 50%; animation: spin 1s linear infinite;
+    .iv-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--iv-text);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 500;
+      font-size: 14px;
+      margin-top: 16px;
+      transition: background 0.2s ease;
     }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .iv-btn:hover { background: #334155; }
 
-    .icon-svg { width: 72px; height: 72px; margin: 0 auto 24px; display: block; }
-    .icon-svg circle { stroke-width: 2.5; fill: none; stroke-dasharray: 100; stroke-dashoffset: 100; animation: drawCircle 0.6s ease forwards; }
-    .icon-svg path { stroke-width: 2.5; fill: none; stroke-dasharray: 50; stroke-dashoffset: 50; animation: drawPath 0.4s ease 0.4s forwards; }
-    .success-svg { stroke: var(--verify-success); }
-    .error-svg { stroke: var(--verify-error); }
-
-    @keyframes drawCircle { to { stroke-dashoffset: 0; } }
-    @keyframes drawPath { to { stroke-dashoffset: 0; } }
-
-    /* Grid */
-    .details-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-      text-align: left; background: #fff; padding: 32px; border-radius: 16px;
-      border: 1px solid var(--verify-border);
-    }
-    
-    .detail-item dt { font-size: 11px; text-transform: uppercase; color: var(--verify-muted); margin-bottom: 6px; font-weight: 600; }
-    .detail-item dd { font-size: 15px; font-weight: 500; color: var(--verify-text); word-break: break-word; }
-
-    .btn {
-      display: inline-block; padding: 14px 32px; background: var(--verify-text);
-      color: #fff; text-decoration: none; border-radius: 10px; font-weight: 500;
-      margin-top: 12px; transition: background 0.2s;
-    }
-    .btn:hover { background: #334155; }
-
+    /* Fluid Scaling */
     @media (max-width: 600px) {
-      .details-grid { grid-template-columns: 1fr; }
-      .verify-card { padding: 40px 24px; }
+      .iv-wrapper { padding: 16px; }
+      .iv-card { padding: 36px 20px; }
+      .iv-grid { grid-template-columns: 1fr; gap: 16px; padding: 20px; }
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>The27LINKS Verification</h1>
-  </header>
-
-  <main>
+  <div class="iv-wrapper">
+    
     <!-- STATE: LOADING -->
-    <div id="state-loading" class="verify-card active">
-      <div class="spinner"></div>
-      <h2>Authenticating Record...</h2>
-      <p class="subtitle">Securely fetching and decrypting external records.</p>
+    <div id="iv-loading" class="iv-card active">
+      <div class="iv-spinner"></div>
+      <h2>Authenticating Record</h2>
+      <p class="iv-subtitle">Establishing secure external connection...</p>
     </div>
 
     <!-- STATE: SUCCESS -->
-    <div id="state-success" class="verify-card">
-      <svg class="icon-svg success-svg" viewBox="0 0 48 48">
-        <circle cx="24" cy="24" r="20" />
-        <path d="M14 24l7 7 14-14" />
+    <div id="iv-success" class="iv-card">
+      <svg class="iv-svg" viewBox="0 0 48 48">
+        <circle class="iv-success-stroke" cx="24" cy="24" r="20" />
+        <path class="iv-success-stroke" d="M14 24l7 7 14-14" />
       </svg>
       <h2>Certificate Verified</h2>
-      <p class="subtitle" style="color: var(--verify-success);">This digital record is authentic and valid.</p>
-      <dl id="certificate-details" class="details-grid"></dl>
+      <p class="iv-subtitle" style="color: var(--iv-success); font-weight: 500;">This digital record is authentic and valid.</p>
+      <dl id="iv-details" class="iv-grid"></dl>
     </div>
 
     <!-- STATE: ERROR -->
-    <div id="state-error" class="verify-card">
-      <svg class="icon-svg error-svg" viewBox="0 0 48 48">
-        <circle cx="24" cy="24" r="20" />
-        <path d="M16 16l16 16M32 16L16 32" />
+    <div id="iv-error" class="iv-card">
+      <svg class="iv-svg" viewBox="0 0 48 48">
+        <circle class="iv-error-stroke" cx="24" cy="24" r="20" />
+        <path class="iv-error-stroke" d="M16 16l16 16M32 16L16 32" />
       </svg>
-      <h2 id="error-title">Record Not Found</h2>
-      <p class="subtitle" id="error-message"></p>
-      <a href="mailto:support@the27links.in" class="btn">Contact Support</a>
+      <h2 id="iv-error-title">Record Not Found</h2>
+      <p class="iv-subtitle" id="iv-error-message">The certificate could not be authenticated.</p>
+      <a href="mailto:support@the27links.in" class="iv-btn">Contact Support</a>
     </div>
-  </main>
+
+  </div>
 
   <script>
     "use strict";
@@ -196,18 +245,18 @@
     }
 
     function switchState(stateId) {
-      document.querySelectorAll('.verify-card').forEach(el => el.classList.remove('active'));
-      setTimeout(() => document.getElementById(stateId).classList.add('active'), 50);
+      document.querySelectorAll('.iv-card').forEach(el => el.classList.remove('active'));
+      setTimeout(() => document.getElementById(stateId).classList.add('active'), 40);
     }
 
     function showError(title, msg) {
-      document.getElementById("error-title").textContent = title;
-      document.getElementById("error-message").textContent = msg;
-      switchState('state-error');
+      document.getElementById("iv-error-title").textContent = title;
+      document.getElementById("iv-error-message").textContent = msg;
+      switchState('iv-error');
     }
 
     function displayData(data) {
-      // Mapping all updated custom parameters
+      // Clean mapping of all your parameters
       const fields = [
         ["Full Name", data.d1], 
         ["Certificate No.", data.d2],
@@ -220,19 +269,19 @@
         ["Authorized By", data.d9]
       ];
 
-      const container = document.getElementById("certificate-details");
+      const container = document.getElementById("iv-details");
       container.innerHTML = "";
 
       fields.forEach(([label, value]) => {
         if (value) {
           const dt = document.createElement("dt"); dt.textContent = label;
           const dd = document.createElement("dd"); dd.textContent = value;
-          const div = document.createElement("div"); div.className = "detail-item";
+          const div = document.createElement("div"); div.className = "iv-item";
           div.appendChild(dt); div.appendChild(dd);
           container.appendChild(div);
         }
       });
-      switchState('state-success');
+      switchState('iv-success');
     }
 
     async function initializeVerification() {
@@ -240,7 +289,7 @@
       let certificateKey = params.get("certificateNo");
 
       if (!certificateKey || certificateKey.trim() === "") {
-        return showError("Invalid Request", "No certificate number found in URL.");
+        return showError("Invalid Request", "No certificate number was provided in the URL.");
       }
       
       certificateKey = certificateKey.trim();
