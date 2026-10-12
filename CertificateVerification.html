@@ -6,46 +6,51 @@
   <title>Certificate Verification | The27LINKS</title>
   <meta name="description" content="Verify The27LINKS certificates and experience letters securely." />
   
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Restored your original fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+  
+  <!-- Your global stylesheet -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
 
   <style>
+    /* -------------------------------------------
+       VERIFICATION PORTAL SPECIFIC STYLES
+    ------------------------------------------- */
     :root {
-      --bg: #f8fafc;
-      --card-bg: rgba(255, 255, 255, 0.9);
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --border: rgba(226, 232, 240, 0.8);
-      --accent: #0ea5e9;
-      --success: #10b981;
-      --error: #ef4444;
-      --font-family: 'Geist', system-ui, sans-serif;
+      --verify-bg: #f8fafc;
+      --verify-card: rgba(255, 255, 255, 0.95);
+      --verify-text: #0f172a;
+      --verify-muted: #64748b;
+      --verify-border: rgba(226, 232, 240, 0.8);
+      --verify-accent: #0f172a;
+      --verify-success: #10b981;
+      --verify-error: #ef4444;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      font-family: var(--font-family);
-      line-height: 1.5;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+    .verification-section {
       position: relative;
-      overflow-x: hidden;
+      padding: 60px 20px;
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background-color: var(--verify-bg);
     }
 
-    /* Animated Ambient Background */
-    body::before {
+    /* Subtle Animated Background Mesh */
+    .verification-section::before {
       content: "";
       position: absolute;
       top: -50%; left: -50%; width: 200%; height: 200%;
-      background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.05), transparent 60%),
-                  radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.03), transparent 50%);
-      animation: ambientShift 15s ease-in-out infinite alternate;
-      z-index: -1;
+      background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.04), transparent 60%),
+                  radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.02), transparent 50%);
+      animation: ambientShift 20s ease-in-out infinite alternate;
+      z-index: 0;
     }
 
     @keyframes ambientShift {
@@ -53,34 +58,18 @@
       100% { transform: translate(2%, 2%) scale(1.05); }
     }
 
-    header {
-      padding: 32px 20px;
-      text-align: center;
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-    }
-    
-    header h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
-    header p { color: var(--text-muted); font-size: 15px; margin-top: 6px; }
-
-    main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 20px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
+    /* Verification Card */
+    .verify-card {
+      position: relative;
+      z-index: 1;
+      background: var(--verify-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--verify-border);
       border-radius: 24px;
-      padding: 48px;
+      padding: 48px 40px;
       width: 100%;
-      max-width: 640px;
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0,0,0,0.02);
+      max-width: 680px;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0,0,0,0.03);
       text-align: center;
       display: none;
       opacity: 0;
@@ -88,182 +77,214 @@
       transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .card.active { 
+    .verify-card.active { 
       display: block; 
       opacity: 1; 
       transform: translateY(0) scale(1); 
     }
 
-    /* Modern Loader */
-    .spinner-container {
-      position: relative;
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 28px;
+    /* Typography inside Card */
+    .verify-card h2 {
+      font-family: 'Geist', sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+      color: var(--verify-text);
     }
+    .verify-card p.subtitle {
+      color: var(--verify-muted);
+      margin-bottom: 36px;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Spinner */
+    .spinner-container { position: relative; width: 56px; height: 56px; margin: 0 auto 28px; }
     .spinner {
       width: 100%; height: 100%;
-      border: 3px solid rgba(14, 165, 233, 0.1);
-      border-left-color: var(--accent);
+      border: 3px solid rgba(15, 23, 42, 0.1);
+      border-left-color: var(--verify-accent);
       border-radius: 50%;
       animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
     /* Animated SVG Icons */
-    .icon-svg {
-      width: 72px; height: 72px;
-      margin: 0 auto 24px;
-      display: block;
-    }
+    .icon-svg { width: 72px; height: 72px; margin: 0 auto 24px; display: block; }
     .icon-svg circle {
-      stroke-width: 2;
-      fill: none;
-      stroke-dasharray: 100;
-      stroke-dashoffset: 100;
+      stroke-width: 2.5; fill: none; stroke-dasharray: 100; stroke-dashoffset: 100;
       animation: drawCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
     }
     .icon-svg path {
-      stroke-width: 2;
-      fill: none;
-      stroke-dasharray: 50;
-      stroke-dashoffset: 50;
+      stroke-width: 2.5; fill: none; stroke-dasharray: 50; stroke-dashoffset: 50;
+      stroke-linecap: round; stroke-linejoin: round;
       animation: drawPath 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.4s forwards;
     }
-    .success-svg { stroke: var(--success); }
-    .error-svg { stroke: var(--error); }
+    .success-svg { stroke: var(--verify-success); }
+    .error-svg { stroke: var(--verify-error); }
 
     @keyframes drawCircle { to { stroke-dashoffset: 0; } }
     @keyframes drawPath { to { stroke-dashoffset: 0; } }
 
-    /* Typography */
-    h2 { font-size: 26px; font-weight: 600; margin-bottom: 10px; letter-spacing: -0.01em; }
-    p.subtitle { color: var(--text-muted); margin-bottom: 36px; font-size: 16px; line-height: 1.6; }
-
-    /* Staggered Details Grid */
+    /* Details Grid */
     .details-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px 20px;
       text-align: left;
-      background: rgba(248, 250, 252, 0.7);
+      background: #ffffff;
       padding: 32px;
       border-radius: 16px;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(226, 232, 240, 0.5);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
     }
 
     .detail-item {
-      opacity: 0;
-      transform: translateY(10px);
+      opacity: 0; transform: translateY(10px);
       animation: fadeUpStagger 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-
-    @keyframes fadeUpStagger {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUpStagger { to { opacity: 1; transform: translateY(0); } }
 
     .detail-item dt {
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--text-muted);
+      color: var(--verify-muted);
       margin-bottom: 6px;
       font-weight: 600;
     }
-
     .detail-item dd {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 500;
-      color: var(--text-main);
+      color: var(--verify-text);
       word-break: break-word;
+      line-height: 1.4;
     }
 
-    /* Buttons */
-    .btn {
-      display: inline-block;
+    /* Support Button */
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 14px 32px;
-      background: var(--text-main);
+      background: var(--verify-text);
       color: #fff;
       text-decoration: none;
-      border-radius: 12px;
+      border-radius: 10px;
       font-weight: 500;
       font-size: 15px;
       margin-top: 12px;
       transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
     }
-    .btn:hover { 
-      background: #334155; 
+    .btn-action:hover {
+      background: #334155;
       transform: translateY(-2px);
       box-shadow: 0 8px 16px rgba(15, 23, 42, 0.2);
     }
 
-    footer {
-      text-align: center;
-      padding: 32px;
-      color: var(--text-muted);
-      font-size: 14px;
-    }
-
+    /* -------------------------------------------
+       BEAUTIFIED MOBILE RESPONSIVENESS
+    ------------------------------------------- */
     @media (max-width: 600px) {
-      .card { padding: 36px 24px; border-radius: 20px; }
-      .details-grid { grid-template-columns: 1fr; padding: 24px; }
-      header { padding: 24px 16px; }
+      .verification-section { padding: 40px 16px; }
+      
+      .verify-card { 
+        padding: 40px 24px; 
+        border-radius: 20px; 
+      }
+      
+      .verify-card h2 { font-size: 22px; margin-bottom: 8px; }
+      .verify-card p.subtitle { font-size: 14px; margin-bottom: 28px; width: 100%; }
+      
+      .icon-svg { width: 60px; height: 60px; margin-bottom: 20px; }
+      .spinner-container { width: 48px; height: 48px; margin-bottom: 24px; }
+      
+      .details-grid { 
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 20px; 
+        padding: 24px 20px; 
+      }
+      
+      .detail-item dt { font-size: 10px; }
+      .detail-item dd { font-size: 14px; }
+      
+      .btn-action { width: 100%; padding: 14px 20px; }
     }
   </style>
 </head>
-<body>
 
+<body data-testid="verification-page">
+
+  <!-- YOUR GLOBAL HEADER -->
   <header>
-    <h1>The27LINKS</h1>
-    <p>Official Verification Portal</p>
+    <div id="header"></div>
   </header>
 
-  <main>
+  <!-- YOUR GLOBAL PAGE TITLE HEADER (Matches Contact Page) -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Verification Portal.</h1>
+      <p>Securely authenticate certificates and experience letters issued by The27LINKS.</p>
+    </div>
+  </section>
+
+  <!-- MAIN VERIFICATION APP -->
+  <section class="verification-section">
+    
     <!-- STATE: LOADING -->
-    <div id="state-loading" class="card active">
+    <div id="state-loading" class="verify-card active">
       <div class="spinner-container">
         <div class="spinner"></div>
       </div>
-      <h2>Verifying Record</h2>
-      <p class="subtitle">Securely authenticating the certificate database...</p>
+      <h2>Authenticating Record...</h2>
+      <p class="subtitle">Please wait while we establish a secure connection to the database.</p>
     </div>
 
     <!-- STATE: SUCCESS -->
-    <div id="state-success" class="card">
+    <div id="state-success" class="verify-card">
       <svg class="icon-svg success-svg" viewBox="0 0 48 48">
         <circle cx="24" cy="24" r="20" />
         <path d="M14 24l7 7 14-14" />
       </svg>
-      <h2>Authentic Certificate</h2>
-      <p class="subtitle" style="color: var(--success); font-weight: 500;">This record has been officially verified.</p>
+      <h2>Certificate Verified</h2>
+      <p class="subtitle" style="color: var(--verify-success); font-weight: 500;">This digital record is authentic and valid.</p>
       <dl id="certificate-details" class="details-grid"></dl>
     </div>
 
     <!-- STATE: ERROR (OOPS) -->
-    <div id="state-error" class="card">
+    <div id="state-error" class="verify-card">
       <svg class="icon-svg error-svg" viewBox="0 0 48 48">
         <circle cx="24" cy="24" r="20" />
         <path d="M16 16l16 16M32 16L16 32" />
       </svg>
-      <h2>Oops! Record Not Found</h2>
+      <h2>Record Not Found</h2>
       <p class="subtitle" id="error-message">
-        We could not find a valid certificate for the provided ID. The link may be broken, tampered with, or the certificate does not exist.
+        We could not find a valid certificate for the provided ID. The link may be broken, tampered with, or does not exist.
       </p>
-      <a href="mailto:support@the27links.in" class="btn">Contact Support</a>
+      <a href="contact.html" class="btn-action">Contact Support</a>
     </div>
-  </main>
 
+  </section>
+
+  <!-- YOUR GLOBAL FOOTER -->
   <footer>
-    &copy; 2026 The27LINKS. All rights reserved.
+     <div id="footer"></div>
   </footer>
+  
+  <!-- YOUR GLOBAL SCRIPTS -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/partials.js"></script>
 
+  <!-- VERIFICATION LOGIC -->
   <script>
     "use strict";
 
-    // GitHub hosted JSON URL
     const DATABASE_URL = "https://the27links.in/assets/Data/certificatesData.json";
-
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
 
@@ -295,8 +316,7 @@
     }
 
     function switchState(stateId) {
-      document.querySelectorAll('.card').forEach(el => el.classList.remove('active'));
-      // Slight delay to allow DOM render before triggering CSS animations
+      document.querySelectorAll('.verify-card').forEach(el => el.classList.remove('active'));
       setTimeout(() => {
         document.getElementById(stateId).classList.add('active');
       }, 50);
@@ -304,11 +324,11 @@
 
     function displayData(data) {
       const fields = [
-        ["Name", data.d1 ?? data.name],
+        ["Full Name", data.d1 ?? data.name],
         ["Certificate No.", data.d2 ?? data.certificateNo],
-        ["Type", data.d3 ?? data.recordType],
-        ["Role", data.d4 ?? data.role],
-        ["Duration/Days", data.d6 ?? data.daysWorked],
+        ["Record Type", data.d3 ?? data.recordType],
+        ["Role / Designation", data.d4 ?? data.role],
+        ["Duration / Tenure", data.d6 ?? data.daysWorked],
         ["Issue Date", data.d8 ?? data.certificateIssueDate],
         ["Authorized By", data.d11 ?? data.approvedBy]
       ];
@@ -324,7 +344,7 @@
           wrapper.style.animationDelay = `${delay}s`;
           wrapper.innerHTML = `<dt>${label}</dt><dd>${value}</dd>`;
           container.appendChild(wrapper);
-          delay += 0.08; // Stagger effect
+          delay += 0.08; 
         }
       });
 
@@ -337,13 +357,12 @@
       const errorMsg = document.getElementById("error-message");
 
       if (!certificateKey) {
-        errorMsg.innerText = "No certificate number was found in the URL. Please ensure you are using the complete verification link.";
+        errorMsg.innerText = "No certificate number was found in the URL. Please ensure you are clicking the complete verification link provided to you.";
         switchState('state-error');
         return;
       }
 
       try {
-        // Cache-buster added here so GitHub Pages always serves the freshest JSON
         const response = await fetch(DATABASE_URL + "?t=" + new Date().getTime());
         if (!response.ok) throw new Error("Database offline");
         const db = await response.json();
@@ -367,7 +386,7 @@
         if (matchedRecord) {
           displayData(matchedRecord);
         } else {
-          errorMsg.innerText = `We could not find a valid certificate matching ID "${certificateKey}". It may be invalid or tampered with.`;
+          errorMsg.innerText = `We could not find a valid record matching ID "${certificateKey}". It may be invalid, tampered with, or does not exist in our system.`;
           switchState('state-error');
         }
 
