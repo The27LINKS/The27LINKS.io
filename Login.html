@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <title>Student Portal | HTML Certification</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --panel: #131b2e;
+      --border: #2a3854;
+      --text: #edf3ff;
+      --muted: #a9b6ce;
+      --accent: #71e0c0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font: 16px/1.6 system-ui, sans-serif;
+    }
+    main { max-width: 900px; margin: auto; padding: 28px 18px 60px; }
+    header, section, .course, .certificate {
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px; margin-bottom: 18px;
+      background: var(--panel);
+    }
+    h1, h2, p { margin-top: 0; }
+    .muted, #status { color: var(--muted); }
+    button {
+      background: var(--accent); color: #07151a;
+      border: 0; border-radius: 9px; padding: 11px 16px;
+      font-weight: 700; cursor: pointer; margin: 4px 6px 4px 0;
+    }
+    button.secondary { background: #26334c; color: var(--text); }
+    button:disabled { opacity: .6; cursor: wait; }
+    .hidden { display: none !important; }
+    .course, .certificate { margin: 12px 0; }
+    .course h3, .certificate h3 { margin: 0 0 8px; }
+    .pill { color: var(--accent); font-size: .9rem; }
+    a { color: var(--accent); }
+    #status { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="pill">ONLINE LEARNING</p>
+    <h1>Student Portal</h1>
+    <p class="muted">Learn, track your progress, and access your certificates.</p>
+    <button id="login">Continue with Google</button>
+    <button id="logout" class="secondary hidden">Sign out</button>
+    <p id="status" role="status" aria-live="polite">Checking your session...</p>
+    <p id="identity" class="muted"></p>
+  </header>
+
+  <div id="dashboard" class="hidden">
+    <section>
+      <h2>Available courses</h2>
+      <div id="courses">Loading courses...</div>
+    </section>
+    <section>
+      <h2>My enrollments</h2>
+      <div id="enrollments">Loading enrollments...</div>
+    </section>
+    <section>
+      <h2>My certificates</h2>
+      <div id="certificates">Loading certificates...</div>
+    </section>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+  "use strict";
+
+  const SUPABASE_URL = "https://tptjlnvcmwehvrbhoyfd.supabase.co";
+  const SUPABASE_KEY = "sb_publishable__WEif2TyKA7qcBplBYRy2g_af9nXcrv";
+
+  const $ = id => document.getElementById(id);
+  const login = $("login");
+  const logout = $("logout");
+  const dashboard = $("dashboard");
+
+  function status(message) {
+    $("status").textContent = message;
+  }
+
+  // Avoid accidentally running with placeholder configuration.
+  if (
+    SUPABASE_URL.includes("YOUR_") ||
+    SUPABASE_KEY.includes("YOUR_")
+  ) {
+    status("Setup required: add your Supabase project URL and publishable key.");
+    login.disabled = true;
+    return;
+  }
+
+  const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY,
+    {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+        flowType: "pkce"
+      }
+    }
+  );
+
+  function node(tag, text, className) {
+    const el = document.createElement(tag);
+    el.textContent = text;
+    if (className) el.className = className;
+    return el;
+  }
+
+  function message(container, text) {
+    container.replaceChildren(node("p", text, "muted"));
+  }
+
+  async function loadCourses() {
+    const container = $("courses");
+    message(container, "Loading courses...");
+
+    const { data, error } = await db
+      .from("courses")
+      .select("id,title,description")
+      .eq("published", true)
+      .order("id");
+
+    if (error) {
+      message(container, "Could not load courses: " + error.message);
+      return;
+    }
+
+    container.replaceChildren();
+    if (!data.length) {
+      message(container, "No published courses yet.");
+      return;
+    }
+
+    for (const course of data) {
+      const card = node("article", "", "course");
+      card.append(
+        node("h3", course.title),
+        node("p", course.description, "muted")
+      );
+
+      const btn = node("button", "Enroll");
+      btn.addEventListener("click", async () => {
+        btn.disabled = true;
+        const { error } = await db.from("enrollments").insert({
+          course_id: course.id
+        });
+
+        // RLS requires user_id to match auth.uid(), so get it
+        // from the verified Supabase session.
+        if (error && error.code !== "23505") {
+          status("Enrollment failed: " + error.message);
+        } else {
+          status(error ? "You are already enrolled." : "Enrollment successful.");
+        }
+
+        btn.disabled = false;
+        await loadEnrollments();
+      });
+
+      card.append(btn);
+      container.append(card);
+    }
+  }
+
+  async function loadEnrollments() {
+    const container = $("enrollments");
+    message(container, "Loading enrollments...");
+
+    const { data, error } = await db
+      .from("enrollments")
+      .select("enrolled_at,progress_percent,courses(title)")
+      .order("enrolled_at", { ascending: false });
+
+    if (error) {
+      message(container, "Could not load enrollments: " + error.message);
+      return;
+    }
+
+    container.replaceChildren();
+    if (!data.length) {
+      message(container, "You have not enrolled in any courses yet.");
+      return;
+    }
+
+    for (const item of data) {
+      const title = item.courses?.title || "Course";
+      const card = node("article", "", "course");
+      card.append(
+        node("h3", title),
+        node("p", "Progress: " + item.progress_percent + "%"),
+        node("p", "Enrolled: " +
+          new Date(item.enrolled_at).toLocaleDateString())
+      );
+      container.append(card);
+    }
+  }
+
+  async function loadCertificates() {
+    const container = $("certificates");
+    message(container, "Loading certificates...");
+
+    const { data, error } = await db
+      .from("certificates")
+      .select("certificate_no,issued_at,revoked_at,courses(title)")
+      .order("issued_at", { ascending: false });
+
+    if (error) {
+      message(container, "Could not load certificates: " + error.message);
+      return;
+    }
+
+    container.replaceChildren();
+    if (!data.length) {
+      message(container, "No certificates have been issued to you yet.");
+      return;
+    }
+
+    for (const cert of data) {
+      const card = node("article", "", "certificate");
+      card.append(
+        node("h3", cert.courses?.title || "Certificate"),
+        node("p", "Certificate no.: " + cert.certificate_no),
+        node("p", "Issued: " +
+          new Date(cert.issued_at).toLocaleDateString()),
+        node("p", cert.revoked_at ? "Status: Revoked" : "Status: Issued",
+          "pill")
+      );
+      container.append(card);
+    }
+  }
+
+  async function refreshDashboard(session) {
+    const signedIn = Boolean(session?.user);
+
+    login.classList.toggle("hidden", signedIn);
+    logout.classList.toggle("hidden", !signedIn);
+    dashboard.classList.toggle("hidden", !signedIn);
+
+    $("identity").textContent = signedIn
+      ? "Signed in as " + (session.user.email || "Google user")
+      : "";
+
+    if (!signedIn) {
+      status("Sign in with Google to access your student account.");
+      $("courses").replaceChildren();
+      $("enrollments").replaceChildren();
+      $("certificates").replaceChildren();
+      return;
+    }
+
+    status("Signed in successfully.");
+    await Promise.all([
+      loadCourses(),
+      loadEnrollments(),
+      loadCertificates()
+    ]);
+  }
+
+  login.addEventListener("click", async () => {
+    login.disabled = true;
+    status("Redirecting to Google...");
+
+    const { error } = await db.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: window.location.origin + window.location.pathname
+      }
+    });
+
+    if (error) status("Login error: " + error.message);
+    login.disabled = false;
+  });
+
+  logout.addEventListener("click", async () => {
+    logout.disabled = true;
+    const { error } = await db.auth.signOut();
+
+    if (error) status("Sign-out error: " + error.message);
+    logout.disabled = false;
+    if (!error) await refreshDashboard(null);
+  });
+
+  // Listen for sign-in, sign-out, and session changes.
+  db.auth.onAuthStateChange((event, session) => {
+    if (event === "INITIAL_SESSION" ||
+        event === "SIGNED_IN" ||
+        event === "SIGNED_OUT" ||
+        event === "TOKEN_REFRESHED") {
+      // Avoid performing Supabase calls inside the auth callback.
+      setTimeout(() => refreshDashboard(session), 0);
+    }
+  });
+
+  db.auth.getSession().then(({ data, error }) => {
+    if (error) status("Session error: " + error.message);
+    else refreshDashboard(data.session);
+  });
+})();
+</script>
+</body>
+</html>
